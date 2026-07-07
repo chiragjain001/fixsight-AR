@@ -4,7 +4,7 @@
     "slug": "fixsight-ar",
     "scheme": "fixsight",
     "version": "1.0.0",
-    "sdkVersion": "54.0.0",
+    "sdkVersion": "52.0.0",
     "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -52,15 +52,7 @@
       ],
       "expo-sqlite",
       "expo-router",
-      "expo-asset",
-      [
-        "expo-build-properties",
-        {
-          "android": {
-            "kotlinVersion": "2.1.0"
-          }
-        }
-      ]
+      "expo-asset"
     ],
     "extra": {
       "router": {},

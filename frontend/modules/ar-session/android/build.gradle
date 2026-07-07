@@ -15,13 +15,16 @@ buildscript {
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'expo-modules-android'
+def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
+apply from: expoModulesCorePlugin
+applyKotlinExpoModulesCorePlugin()
+useCoreDependencies()
+useDefaultAndroidSdkVersions()
+useExpoPublishing()
 
 android {
-    compileSdkVersion 35
+    namespace "expo.modules.arsession"
     defaultConfig {
-        minSdkVersion 24
-        targetSdkVersion 35
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
