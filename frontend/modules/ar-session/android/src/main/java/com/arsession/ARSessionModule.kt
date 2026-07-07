@@ -100,6 +100,6 @@ class ARSessionModule : Module() {
     }
 
     // ── Native View ───────────────────────────────────────────────────────────
-    View(ARSessionView::class)
+    View(ARSessionView::class) {}
   }
 }
