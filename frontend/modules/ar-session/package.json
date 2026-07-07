@@ -1,0 +1,12 @@
+{
+  "name": "ar-session",
+  "version": "1.0.0",
+  "description": "Native AR session module for FixSight — wraps ARKit (iOS) and ARCore (Android)",
+  "main": "index.js",
+  "source": "./index.ts",
+  "types": "./index.d.ts",
+  "peerDependencies": {
+    "expo": "*",
+    "expo-modules-core": "*"
+  }
+}

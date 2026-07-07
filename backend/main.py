@@ -557,3 +557,123 @@ async def refresh_scene_endpoint(req: RefreshSceneRequest):
         return result
     except Exception as e:
         return {"event": "error", "message": str(e)}
+
+
+# ── /ground-label ──────────────────────────────────────────────────────────────
+# Calls Moondream to:
+#   1. Identify which parts are relevant to the user query (via /query)
+#   2. Point at each part (via /point) to get normalized (x, y) coordinates
+# Returns a list of labels ready for ARBridge.hitTest() on the frontend.
+# ──────────────────────────────────────────────────────────────────────────────
+
+try:
+    import httpx
+    _httpx_available = True
+except ImportError:
+    _httpx_available = False
+    logger.warning("[ground-label] httpx not installed. Run: pip install httpx")
+
+_moondream_key_index = 0
+
+def _get_moondream_key() -> str:
+    global _moondream_key_index
+    raw = os.environ.get("MOONDREAM_API_KEY", "")
+    keys = [k.strip() for k in raw.split(",") if k.strip()]
+    if not keys:
+        return ""
+    key = keys[_moondream_key_index % len(keys)]
+    _moondream_key_index += 1
+    return key
+
+
+class GroundLabelRequest(BaseModel):
+    image_b64: str              # JPEG base64 from ARBridge.captureFrame()
+    query: str                  # The user's voice query or mode context
+    max_labels: int = 3         # Limit labels to keep UI uncluttered
+
+
+@app.post("/ground-label")
+async def ground_label_endpoint(req: GroundLabelRequest):
+    """
+    Calls Moondream to identify and spatially locate relevant components.
+    Returns: [{ id, label, instruction, xNorm, yNorm, confidence }]
+    These coordinates are passed to ARBridge.hitTest() on the frontend.
+    """
+    if not _httpx_available:
+        raise HTTPException(status_code=503, detail="httpx not installed on server")
+
+    key = _get_moondream_key()
+    if not key:
+        raise HTTPException(status_code=500, detail="MOONDREAM_API_KEY not configured")
+
+    image_url = f"data:image/jpeg;base64,{req.image_b64}"
+    headers = {
+        "X-Moondream-Auth": key,
+        "Content-Type": "application/json",
+    }
+
+    async with httpx.AsyncClient(timeout=15.0) as client:
+        # Step 1: Ask Moondream which parts are relevant to this query
+        try:
+            r1 = await client.post(
+                "https://api.moondream.ai/v1/query",
+                headers=headers,
+                json={
+                    "image_url": image_url,
+                    "question": (
+                        f"Identify up to {req.max_labels} visible components or parts of this machine "
+                        f"that are most relevant to: \"{req.query}\". "
+                        f"Respond ONLY with JSON in this exact format: "
+                        f'{{\"parts\":[{{\"label\":\"Part Name\",\"instruction\":\"What to do\"}}]}}'
+                    ),
+                    "stream": False,
+                }
+            )
+            r1.raise_for_status()
+            answer_text = r1.json().get("answer", "{}")
+            # Clean up potential markdown wrapping
+            answer_text = answer_text.strip().lstrip("```json").lstrip("```").rstrip("```").strip()
+            parts_data = json.loads(answer_text).get("parts", [])[:req.max_labels]
+        except Exception as e:
+            logger.warning(f"[ground-label] Step 1 (query) failed: {e}")
+            return {"labels": []}
+
+        if not parts_data:
+            return {"labels": []}
+
+        # Step 2: Point at each identified part in parallel
+        async def point_at_part(part: dict, idx: int) -> Optional[dict]:
+            try:
+                r2 = await client.post(
+                    "https://api.moondream.ai/v1/point",
+                    headers=headers,
+                    json={
+                        "image_url": image_url,
+                        "object": part.get("label", ""),
+                        "stream": False,
+                    }
+                )
+                r2.raise_for_status()
+                pts = r2.json().get("points", [])
+                if not pts:
+                    return None
+                pt = pts[0]
+                label_slug = part["label"].lower().replace(" ", "_")
+                return {
+                    "id": f"{label_slug}_{int(asyncio.get_event_loop().time() * 1000)}_{idx}",
+                    "label": part.get("label", "Component"),
+                    "instruction": part.get("instruction", ""),
+                    "xNorm": float(pt.get("x", 0.5)),
+                    "yNorm": float(pt.get("y", 0.5)),
+                    "confidence": 0.9,
+                }
+            except Exception as e:
+                logger.warning(f"[ground-label] Step 2 point failed for '{part.get('label')}': {e}")
+                return None
+
+        tasks = [point_at_part(p, i) for i, p in enumerate(parts_data)]
+        results = await asyncio.gather(*tasks)
+        labels = [r for r in results if r is not None]
+
+    logger.info(f"[ground-label] query='{req.query[:40]}' → {len(labels)} label(s) placed")
+    return {"labels": labels}

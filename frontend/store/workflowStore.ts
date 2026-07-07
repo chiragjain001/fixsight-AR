@@ -179,8 +179,9 @@ export interface WorkflowStore {
   spatialTargets: SpatialTarget[];
   generalSolutions: string[];
 
-  // Camera
+  // Camera — cameraRef kept for legacy compat, captureFrame is the AR path
   cameraRef: any | null;
+  captureFrame: (() => Promise<{ base64: string }>) | null;
   facing: FacingMode;
   torchEnabled: boolean;
   isLandscape: boolean;
@@ -190,6 +191,7 @@ export interface WorkflowStore {
 
   // Actions
   setCameraRef: (ref: any | null) => void;
+  setCaptureFrame: (fn: () => Promise<{ base64: string }>) => void;
   triggerManualScan: () => void;
   startScanningSim: () => void;
   runRealScan: () => Promise<void>;
@@ -299,12 +301,14 @@ export const useWorkflowStore = create<WorkflowStore>((set, get) => ({
   spatialTargets: [],
   generalSolutions: [],
   cameraRef: null,
+  captureFrame: null,
   facing: 'back',
   torchEnabled: false,
   isLandscape: false,
   sheetSnapIndex: -1,
 
   setCameraRef: (cameraRef) => set({ cameraRef }),
+  setCaptureFrame: (fn) => set({ captureFrame: fn }),
   triggerManualScan: () => set((state) => ({ manualScanTick: state.manualScanTick + 1 })),
 
   startScanningSim: () => {
@@ -322,8 +326,9 @@ export const useWorkflowStore = create<WorkflowStore>((set, get) => ({
   },
 
   runRealScan: async () => {
-    const { cameraRef } = get();
-    if (!cameraRef) {
+    const { cameraRef, captureFrame } = get();
+    const hasCamera = cameraRef || captureFrame;
+    if (!hasCamera) {
       alert("Camera is not ready yet!");
       return;
     }
@@ -342,13 +347,24 @@ export const useWorkflowStore = create<WorkflowStore>((set, get) => ({
     }, 100);
 
     try {
-      const photo = await cameraRef.takePhoto({ flash: 'off' });
-      const response = await fetch(`file://${photo.path}`);
-      const blob = await response.blob();
-      
-      const reader = new FileReader();
-      reader.onloadend = async () => {
-        const b64 = (reader.result as string).split(',')[1];
+      let b64: string;
+
+      if (captureFrame) {
+        // AR path — captureFrame() returns base64 directly
+        const result = await captureFrame();
+        b64 = result.base64;
+      } else {
+        // Legacy VisionCamera path
+        const photo = await cameraRef.takePhoto({ flash: 'off' });
+        const response = await fetch(`file://${photo.path}`);
+        const blob = await response.blob();
+        b64 = await new Promise<string>((res, rej) => {
+          const reader = new FileReader();
+          reader.onloadend = () => res((reader.result as string).split(',')[1]);
+          reader.onerror = rej;
+          reader.readAsDataURL(blob);
+        });
+      }
         
         try {
           const scanRes = await fetch(`${BACKEND_URL}/scan-scene`, {

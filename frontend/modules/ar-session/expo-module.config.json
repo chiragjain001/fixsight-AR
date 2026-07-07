@@ -1,0 +1,11 @@
+{
+  "platforms": ["ios", "android"],
+  "ios": {
+    "modules": ["ARSessionModule"],
+    "views": ["ARSessionView"]
+  },
+  "android": {
+    "modules": ["com.arsession.ARSessionModule"],
+    "views": ["com.arsession.ARSessionView"]
+  }
+}

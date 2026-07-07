@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "expo-router/entry",
   "dependencies": {
+    "ar-session": "file:./modules/ar-session",
+    "expo-modules-core": "~2.3.0",
     "@expo/metro-runtime": "~6.1.2",
     "@gorhom/bottom-sheet": "^5.0.6",
     "@shopify/react-native-skia": "2.2.12",

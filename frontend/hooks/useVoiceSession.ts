@@ -7,6 +7,7 @@ import { useARTrackingStore } from '../store/arTrackingStore';
 import { BACKEND_URL } from '../src/config';
 import { Platform } from 'react-native';
 import { useSceneRefreshManager } from './useSceneRefreshManager';
+import { useARGrounding } from './useARGrounding';
 
 const SILENCE_DURATION_MS    = 1400;  // ms of silence after speech → submit (longer = less hair-trigger)
 const INACTIVITY_DURATION_MS = 12000; // ms with no speech at all → end session
@@ -23,6 +24,13 @@ export const useVoiceSession = () => {
   const store = useWorkflowStore();
   const { compressIfNeeded } = useMemoryManager();
   const { analyzeIntent } = useSceneRefreshManager();
+  const { groundLabels, clearAll: clearARLabels } = useARGrounding();
+
+  // captureFrame: AR path (preferred) or legacy VisionCamera path
+  const captureFrameRef = useRef<(() => Promise<{ base64: string }>) | null>(null);
+  useEffect(() => {
+    captureFrameRef.current = useWorkflowStore.getState().captureFrame;
+  }, [store.captureFrame ?? null]);
 
   // ── Metering exposed to UI ────────────────────────────────────────────────
   const [metering, setMetering] = useState(-160);
@@ -547,6 +555,12 @@ export const useVoiceSession = () => {
                 fullAssistantReply += data.text + ' ';
               } else if (data.type === 'ar_context' && data.highlight_target) {
                 useARTrackingStore.getState().setChatFocusTarget(data.highlight_target);
+                // Ground any VLM-returned label coordinates as 3D anchors
+                if (Array.isArray(data.labels) && data.labels.length > 0) {
+                  groundLabels(data.labels).catch((e: any) =>
+                    console.warn('[VoiceSession] AR grounding failed (non-fatal):', e)
+                  );
+                }
               } else if (data.type === 'tool_call') {
                 isToolRunningRef.current = true;
                 if (data.ack_text) {
@@ -725,6 +739,8 @@ export const useVoiceSession = () => {
       clearTTSQueue();
       hasSpoken.current    = false;
       isProcessing.current = false;
+      // Clear AR labels when voice session ends
+      clearARLabels().catch(() => {});
     }
   }, [store.voiceSessionActive]);
 

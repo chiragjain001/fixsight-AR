@@ -1,11 +1,13 @@
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
 import { Canvas } from '@shopify/react-native-skia';
-import { useSharedValue, useDerivedValue, withTiming } from 'react-native-reanimated';
-import { useARTrackingStore, TrackedTarget, arOffsetX, arOffsetY } from '../../store/arTrackingStore';
+import { useSharedValue, useDerivedValue } from 'react-native-reanimated';
+import { useARTrackingStore, arOffsetX, arOffsetY } from '../../store/arTrackingStore';
 import { useWorkflowStore } from '../../store/workflowStore';
 import { ARMarker } from './ARMarker';
 import { ARLabelNative } from './ARLabel';
+import { useARAnchorStore } from '../../store/arAnchorStore';
+import { ARMarkerNativeSkia, ARMarkerNativeLabel } from './ARMarkerNative';
 
 // Helper to convert workflowStore component to virtual TrackedTarget
 function useVirtualTargets() {
@@ -161,16 +163,47 @@ function ARLabelNativeOverlay({
 
 // ─── Component ────────────────────────────────────────────────────────────
 export function AROverlayLayer() {
-  const socketTargets = useARTrackingStore((s) => s.targets);
+  const socketTargets   = useARTrackingStore((s) => s.targets);
   const chatFocusTargetId = useARTrackingStore((s) => s.chatFocusTargetId);
-  const workflowState = useWorkflowStore((s) => s.workflowState);
+  const workflowState   = useWorkflowStore((s) => s.workflowState);
   const { components, setActiveComponentIndex } = useWorkflowStore();
-  
-  const virtualTargets = useVirtualTargets();
-
   const voiceSessionActive = useWorkflowStore((s) => s.voiceSessionActive);
+  const virtualTargets  = useVirtualTargets();
 
-  // Hide AR labels/rings during voice session (except Interactive Guide or focused target)
+  // ── 3D Native AR anchors (Solution A path) ──────────────────────────────
+  const arAnchors = useARAnchorStore((s) => s.anchors);
+  const hasNativeAnchors = arAnchors.length > 0;
+
+  // When native 3D anchors exist, render them and skip the screen-space branch
+  if (hasNativeAnchors) {
+    return (
+      <View style={[StyleSheet.absoluteFill, { zIndex: 10 }]} pointerEvents="box-none">
+        {/* Skia: rings + connector lines for all 3D anchors */}
+        <Canvas style={StyleSheet.absoluteFill}>
+          {arAnchors.map((anchor) => (
+            <ARMarkerNativeSkia key={anchor.id} anchor={anchor} />
+          ))}
+        </Canvas>
+
+        {/* RN: pill labels for all 3D anchors */}
+        {arAnchors.map((anchor) => (
+          <ARMarkerNativeLabel
+            key={anchor.id}
+            anchor={anchor}
+            onPress={() => {
+              // Tap label → find matching component and expand detail sheet
+              const idx = components.findIndex(
+                (c) => c.id === anchor.id || c.label === anchor.label
+              );
+              if (idx !== -1) setActiveComponentIndex(idx);
+            }}
+          />
+        ))}
+      </View>
+    );
+  }
+
+  // ── Legacy screen-space branch (kept as fallback) ──────────────────────
   if (voiceSessionActive && workflowState !== 'INTERACTIVE_GUIDE' && !chatFocusTargetId) return null;
 
   const isSimulated =
@@ -192,21 +225,13 @@ export function AROverlayLayer() {
 
   return (
     <View style={[StyleSheet.absoluteFill, { zIndex: 10 }]} pointerEvents="box-none">
-      {/* 1. Canvas drawing rings and connector lines */}
       <Canvas style={StyleSheet.absoluteFill}>
         {displayTargets.map((target: any) => {
           if (target.isHidden) return null;
-          // During voice session, only show the focused target to declutter
-          if (voiceSessionActive && workflowState !== 'INTERACTIVE_GUIDE' && target.id !== chatFocusTargetId) {
-            return null;
-          }
-          
+          if (voiceSessionActive && workflowState !== 'INTERACTIVE_GUIDE' && target.id !== chatFocusTargetId) return null;
           const isActive = isSimulated ? target.isActive : true;
-          const isFaded = isSimulated ? target.isFaded : false;
-          
-          // Map to DETECTION_FADED (which returns 0.05 opacity) if faded
+          const isFaded  = isSimulated ? target.isFaded  : false;
           const levelVal = isActive ? 'HAZARD_FOCUS' : (isFaded ? 'DETECTION_FADED' : 'DETECTION');
-          
           return (
             <ARMarker
               key={target.id}
@@ -220,24 +245,15 @@ export function AROverlayLayer() {
           );
         })}
       </Canvas>
-
-      {/* 2. Platform Native Text Labels */}
       {displayTargets.map((target: any) => {
         if (target.isHidden) return null;
-        if (voiceSessionActive && workflowState !== 'INTERACTIVE_GUIDE' && target.id !== chatFocusTargetId) {
-          return null;
-        }
-        
+        if (voiceSessionActive && workflowState !== 'INTERACTIVE_GUIDE' && target.id !== chatFocusTargetId) return null;
         const isActive = isSimulated ? target.isActive : true;
-        const isFaded = isSimulated ? target.isFaded : false;
-        
+        const isFaded  = isSimulated ? target.isFaded  : false;
         const handlePress = () => {
           const idx = components.findIndex((c) => c.id === target.id);
-          if (idx !== -1) {
-            setActiveComponentIndex(idx);
-          }
+          if (idx !== -1) setActiveComponentIndex(idx);
         };
-
         return (
           <ARLabelNativeOverlay
             key={target.id}

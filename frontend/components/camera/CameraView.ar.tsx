@@ -1,5 +1,5 @@
 /**
- * CameraView.tsx
+ * CameraView.ar.tsx
  *
  * The new camera component for Solution A (always-on AR).
  * Replaces CameraView.vision-camera.tsx entirely.
