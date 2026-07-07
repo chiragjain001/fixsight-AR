@@ -436,8 +436,6 @@ export const useWorkflowStore = create<WorkflowStore>((set, get) => ({
           set({ workflowState: 'READY', scanningProgress: 0 });
           alert("Identification failed. Please ensure the backend is running and online.");
         }
-      };
-      reader.readAsDataURL(blob);
       
     } catch (e) {
       console.error('[Scan] Photo capture failed:', e);

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "fixsight-temp",
-    "slug": "fixsight-temp",
+    "name": "fixsight-ar",
+    "slug": "fixsight-ar",
     "scheme": "fixsight",
     "version": "1.0.0",
     "sdkVersion": "54.0.0",
@@ -11,7 +11,7 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSCameraUsageDescription": "FixSight uses AR to place labels on machine components.",
+        "NSCameraUsageDescription": "FixSight needs camera access to detect hazards.",
         "NSMicrophoneUsageDescription": "FixSight needs microphone access to transcribe voice messages into text.",
         "NSLocationWhenInUseUsageDescription": "Required for AR world tracking accuracy."
       }
@@ -57,9 +57,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "b971f202-a995-4dc9-9646-676b9a836c24"
+        "projectId": "0eb3d3d5-5d36-4e61-a8eb-1d231e636ab5"
       }
     },
-    "owner": "yugsheth1"
+    "owner": "chirag_jain"
   }
 }
