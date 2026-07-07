@@ -52,7 +52,15 @@
       ],
       "expo-sqlite",
       "expo-router",
-      "expo-asset"
+      "expo-asset",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "kotlinVersion": "2.1.0"
+          }
+        }
+      ]
     ],
     "extra": {
       "router": {},
