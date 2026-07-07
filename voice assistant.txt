@@ -1,0 +1,356 @@
+You are a senior full-stack AI engineer building FixSight Voice Assistant Mode.
+
+IMPORTANT PRODUCT FLOW
+- The app already uses VLM to detect/understand the live scene first.
+- Only after scene understanding is ready, show the voice assistant mic button.
+- This is NOT a standalone voice chat. It is a scene-aware AR voice assistant.
+- The assistant must feel like a real-time human-like conversation partner.
+
+CORE GOAL
+Build a premium, iOS-like, real-time voice assistant experience for an AR app where:
+- User sees scene detection first.
+- Then taps mic once to start voice mode.
+- App continuously listens without requiring repeated mic taps.
+- User can speak naturally about the scene.
+- Assistant answers short, optimistic, accurate, and scene-aware.
+- User can interrupt assistant speech anytime by speaking or pressing Stop.
+- Session memory must stay only for the current session.
+- VLM must not be hit on every query.
+- The system must stay fast, smooth, reliable, and low-latency.
+
+VOICE MODE BEHAVIOR
+1. Scene-first entry
+   - First run VLM scene detection.
+   - Build a structured scene summary.
+   - When scene summary is ready, show the mic button.
+
+2. Mic activation
+   - User taps mic once.
+   - Show a bottom-center listening/speaking panel.
+   - Begin listening immediately.
+   - No need for the user to press mic again for every new question.
+
+3. End-of-utterance logic
+   - Use short silence detection to detect when the user finished speaking.
+   - After about 2 seconds of pause/silence, treat it as end-of-utterance and auto-submit that query.
+   - Do NOT wait for manual submit.
+   - Use a longer overall timeout of 10 seconds of inactivity to auto-off the entire voice mode.
+   - These are two different rules:
+     a) 2 sec pause = end of current user utterance
+     b) 10 sec inactivity = exit voice mode / auto-off
+
+4. Barge-in / interruption
+   - If assistant is speaking and user starts talking, stop TTS immediately.
+   - If user presses Stop, stop TTS immediately and switch back to listening.
+   - Barge-in must feel instant and reliable.
+
+5. Language handling
+   - Detect language dynamically.
+   - If user speaks English, answer in English.
+   - If user speaks Hindi, answer in Hindi.
+   - If user speaks Hinglish, answer in natural Hinglish.
+   - Do not force formal language.
+   - Mirror user style naturally.
+
+6. Response style
+   - Keep replies short, useful, and optimistic.
+   - Solve the user’s immediate question first.
+   - Avoid long explanations unless absolutely needed for troubleshooting.
+   - Sound human, not robotic.
+   - Maintain confidence without over-explaining.
+
+7. Exit behavior
+   - Top-left cross button exits voice assistant mode.
+   - After exit, return to the app’s normal mode switch panel.
+   - Do not close the app.
+   - Preserve only current-session memory.
+
+ARCHITECTURE REQUIREMENTS
+Design the system with these layers:
+
+A. Scene intelligence layer
+- VLM runs first to understand the current scene.
+- Convert raw VLM output into a structured scene summary.
+- Keep summary compact and usable for conversation.
+- Refresh VLM only when the scene materially changes or summary becomes stale.
+- Do not call VLM on every query.
+
+B. Memory layer
+Maintain two short-lived memory objects only for the current session:
+
+1) scene_summary
+   - object/machine name
+   - visible components
+   - current state
+   - issue/goal
+   - warnings
+   - confidence
+   - last refreshed time
+
+2) conversation_summary
+   - user’s latest goal
+   - what user already asked
+   - what assistant already explained
+   - open follow-up context
+   - language mode
+
+C. Orchestration layer
+For every user utterance:
+- Check if user is speaking or assistant is speaking.
+- Handle barge-in instantly.
+- Transcribe the utterance.
+- Decide whether scene refresh is needed.
+- Assemble prompt using:
+  a) scene_summary
+  b) conversation_summary
+  c) latest user query
+  d) detected language
+  e) answer style rules
+- Generate a short answer.
+- Stream response to TTS if possible.
+- Update conversation summary after each turn.
+- Keep the system in a listening-speaking loop until exit or auto-off.
+
+D. Audio layer
+Use:
+- Voice activity detection for silence/end-of-speech
+- Real-time streaming transcription
+- Low-latency TTS
+- Instant interruption support
+- Automatic switch back to listening after speech ends
+
+E. UI layer
+Create a minimal premium mobile UI:
+- Top-left cross icon to exit voice mode
+- Bottom-center floating assistant sheet/card
+- States:
+  - Listening
+  - Thinking
+  - Speaking
+- Stop button visible and easy to tap
+- Smooth waveform / pulse animation
+- Clean iOS-like look
+- No clutter
+- No repeated mic tapping required
+- The UI should feel like a live conversation, not a form
+
+SMART SCENE REFRESH LOGIC
+Do NOT call VLM every time.
+Call or refresh VLM only when:
+- camera view changes significantly
+- object/machine changes
+- user explicitly asks to re-check the scene
+- scene summary is stale
+- assistant detects contradiction between current query and stored scene
+- confidence is low
+- user says things like “now check this again”, “what changed?”, “look here again”
+
+Otherwise:
+- reuse the existing scene_summary
+- answer using LLM only
+
+CONVERSATION MEMORY RULES
+- Keep only current-session memory.
+- Store compressed summaries, not full transcript.
+- After every few turns, compress older context into a smaller summary.
+- Never persist beyond the session.
+- Use memory to reduce repeated VLM calls and keep answers coherent.
+
+RESPONSE ORCHESTRATION
+For each user query:
+1. Detect language.
+2. If assistant is speaking and user barges in, stop TTS.
+3. Transcribe user speech.
+4. If 2 sec silence occurred, auto-submit that utterance.
+5. If 10 sec inactivity occurs, auto-off voice mode.
+6. Check if VLM scene refresh is needed.
+7. Build prompt from:
+   - scene_summary
+   - conversation_summary
+   - latest query
+   - language mode
+   - response style rules
+8. Generate short answer.
+9. Start TTS playback.
+10. While speaking, keep listening for barge-in.
+11. Update conversation_summary.
+12. Return to listening state.
+
+RECOMMENDED LIBRARIES / MODELS
+Use a practical, low-latency stack:
+
+STT:
+- whisper.cpp
+- Prefer small/base quantized multilingual model for balance of speed and quality
+- If device is weak, use base quantized model first
+- If device is stronger, allow small multilingual model
+- Use streaming transcription
+
+VAD:
+- Silero VAD as default
+- Use WebRTC VAD only as fallback if needed
+- Prefer Silero for better practical accuracy and lightweight runtime
+
+TTS:
+- Piper or the newer piper1-gpl direction as local TTS
+- Use a stable pinned voice model
+- If local TTS is unavailable on device, fall back to system TTS only as backup
+- Voice must sound natural and human-like
+- Keep latency low
+
+Scene/VLM:
+- Use the existing FixSight VLM backend
+- Do not re-run VLM for every follow-up
+- Only refresh when the scene changes materially
+
+STATE MACHINE
+Implement a strict state machine:
+- IDLE
+- SCENE_READY
+- LISTENING
+- PROCESSING_STT
+- THINKING
+- SPEAKING
+- INTERRUPTED
+- EXITING
+
+State rules:
+- IDLE -> SCENE_READY after scene detection
+- SCENE_READY -> LISTENING after mic tap
+- LISTENING -> PROCESSING_STT after user finishes speaking
+- PROCESSING_STT -> THINKING after transcription
+- THINKING -> SPEAKING after LLM answer is ready
+- SPEAKING -> LISTENING after TTS ends
+- SPEAKING -> INTERRUPTED when user speaks or presses Stop
+- Any state -> EXITING when cross button pressed
+
+UX DETAILS
+- The mic button should appear only after scene detection is ready.
+- Listening state should show a soft pulse/wave animation.
+- Speaking state should show a different animation and a clear Stop action.
+- “Tap to interrupt” or “Speak to interrupt” must be obvious.
+- The answer should feel like a live assistant, not a support form.
+- Make the UI calm, premium, and minimal.
+- The response should be short enough that the user can continue acting immediately.
+
+FEATURE SUGGESTIONS TO INCLUDE
+Add these enhancements too:
+- Smart follow-up understanding like “okay”, “haan”, “next”, “now what?”
+- Proactive warning if VLM sees a dangerous or blocking issue
+- Scene-change command like “recheck this”
+- Instant resume listening after TTS ends
+- Optional one-tap replay of last answer
+- Conversation compression after several turns
+- Confidence-aware replies: if scene confidence is low, ask a short clarifying question instead of hallucinating
+
+ERROR HANDLING
+Handle these cases cleanly:
+
+1) STT failure
+- Retry once
+- If still failing, show a short message and keep listening
+- Do not crash voice mode
+
+2) VLM failure
+- Reuse last valid scene_summary
+- Mark confidence lower
+- Give a safe answer
+- If needed, ask user to point again
+
+3) TTS failure
+- Fall back to system TTS
+- If even that fails, show text response only
+- Keep the assistant usable
+
+4) Network failure
+- If backend is unavailable, keep the UI stable
+- Show brief offline/connection status
+- Use last session memory if possible
+
+5) Permission denied
+- Handle camera/mic permissions gracefully
+- Show a small action message
+- Do not break the whole app
+
+6) No speech detected
+- After repeated silence, stay in listening or auto-off depending on timeout
+- Do not spam the user
+- Keep UX quiet and clean
+
+7) Low confidence / conflicting scene
+- Do not hallucinate
+- Ask the user to point again or recheck the object
+
+OUTPUT CONTRACTS
+Use strict JSON for internal state:
+
+Scene summary:
+{
+  "scene_title": "",
+  "object_type": "",
+  "visible_parts": [],
+  "current_state": "",
+  "issue_or_goal": "",
+  "warnings": [],
+  "confidence": 0.0,
+  "last_refreshed_at": ""
+}
+
+Conversation summary:
+{
+  "language_mode": "",
+  "user_goal": "",
+  "what_user_has_done": [],
+  "what_assistant_has_said": [],
+  "open_questions": [],
+  "last_turn_summary": ""
+}
+
+Assistant response:
+{
+  "response_text": "",
+  "language_mode": "",
+  "should_refresh_scene": false,
+  "follow_up_needed": false
+}
+
+IMPLEMENTATION DELIVERABLES
+Provide:
+1. Full component structure
+2. UI screen + bottom assistant sheet
+3. Scene detection gate before mic visibility
+4. Audio capture + VAD + endpointing flow
+5. STT integration
+6. TTS integration
+7. Barge-in and stop handling
+8. Scene summary memory system
+9. Conversation summary memory system
+10. VLM refresh strategy
+11. LLM prompt assembly strategy
+12. State machine implementation
+13. Error handling and fallbacks
+14. Clean hook/service separation
+15. Production-ready code with comments
+
+QUALITY BAR
+The implementation must be:
+- fast
+- smooth
+- reliable
+- low-latency
+- production-ready
+- maintainable
+- mobile friendly
+- scene-aware
+- session-based
+- interruption-safe
+- human-like in feel
+
+IMPORTANT
+- One mic tap starts the full voice conversation.
+- User should not need to tap again for every new query.
+- Scene should be understood before the mic appears.
+- Responses should stay short but useful.
+- Stop button and barge-in must always work.
+- The assistant should feel like a real person helping live in the scene.
+Now implement the feature end-to-end with clean architecture and strong error handling.

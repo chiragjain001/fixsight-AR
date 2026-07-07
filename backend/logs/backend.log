@@ -1,0 +1,1239 @@
+2026-07-06 12:37:40 [INFO] [Detector] Mistral SDK initialized with 2 keys.
+2026-07-06 12:37:40 [INFO] [Detector] Image prepared: 576x768, 3058100 → 47452 chars (1%)
+2026-07-06 12:37:50 [INFO] HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:37:50 [INFO] [Detector] Mistral Pixtral-12B responded (backoff attempt 1, key attempt 1).
+2026-07-06 12:37:52 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:37:53 [INFO] 
+[Backend] 📸 INITIAL SCAN COMPLETE
+2026-07-06 12:37:53 [INFO]    ┣━ Device: ASUS Laptop
+2026-07-06 12:37:53 [INFO]    ┣━ Current Scene Memory: **Scene Understanding/Description:**
+- Exact device name: ASUS Laptop (likely a ZenBook or Vivobook series based on design)
+- Brand/model: ASUS (brand visible on the bottom bezel of the laptop)
+- Visible components/parts:
+  - Laptop screen displaying a code editor (likely VS Code) with Python script open.
+  - Keyboard with visible keys and trackpad.
+  - ASUS logo on the bottom bezel of the laptop.
+  - Two stickers on the bottom front edge of the laptop (likely warranty or certification stickers).
+  - External mouse and mousepad partially visible on the left side of the desk.
+  - A black office chair partially visible behind the laptop.
+  - A window with bars in the background.
+- Current operational state: The laptop is powered on and actively being used (code editor is open and appears to be in use).
+- Any visible damage or abnormalities: No visible damage or abnormalities are apparent in the image.
+
+---
+
+**Object Detection:**
+```json
+{
+  "detections": [
+    {
+      "label": "Laptop Screen",
+      "bbox": [0.15, 0.15, 0.85, 0.45]
+    },
+    {
+      "label": "Laptop Keyboard",
+      "bbox": [0.15, 0.55, 0.85, 0.85]
+    },
+    {
+      "label": "Trackpad",
+      "bbox": [0.45, 0.80, 0.65, 0.88]
+    },
+    {
+      "label": "ASUS Logo",
+      "bbox": [0.40, 0.85, 0.50, 0.88]
+    },
+    {
+      "label": "Sticker (bottom front left)",
+      "bbox": [0.25, 0.88, 0.30, 0.95]
+    },
+    {
+      "label": "Sticker (bottom front right)",
+      "bbox": [0.35, 0.88, 0.40, 0.95]
+    },
+    {
+      "label": "Mouse",
+      "bbox": [0.05, 0.60, 0.15, 0.70]
+    },
+    {
+      "label": "Mousepad",
+      "bbox": [0.00, 0.65, 0.15, 0.75]
+    },
+    {
+      "label": "Office Chair",
+      "bbox": [0.20, 0.00, 0.55, 0.30]
+    },
+    {
+      "label": "Window with bars",
+      "bbox": [0.60, 0.00, 0.85, 0.30]
+    }
+  ]
+}
+```
+2026-07-06 12:37:53 [INFO]    ┗━ Conversation Context: Initial scan complete.
+2026-07-06 12:37:59 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:38:38 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:38:38 [INFO] [Backend] 🎤 Transcribed text: " My laptop is stuck. My laptop is stuck. Hello, are you able to hear me? Are you able to hear me?" (Language: English)
+2026-07-06 12:38:39 [INFO] [Backend] 🎙️ Voice stream-chat: ' My laptop is stuck. My laptop is stuck. Hello, are you able' | scene_id=45657629-d649-4742-9cc4-e9d8fdf98b79 | lang=English
+2026-07-06 12:38:39 [INFO] [Backend] 📸 Scene summary received: {'device': 'ASUS Laptop', 'confidence': 0.9, 'currentState': 'An ASUS laptop is powered on and actively being used with a code editor open on the screen.', 'warnings': [], 'components': ['Laptop Screen', 'Laptop Keyboard', 'Trackpad', 'ASUS Logo', 'Sticker (bottom front left)', 'Sticker (bottom front right)', 'Mouse', 'Mousepad']}
+2026-07-06 12:38:39 [INFO] [Detector] 🧠 Generated Routing Context:
+The user is currently inspecting ASUS Laptop. The system is in An ASUS laptop is powered on and actively being used with a code editor open on the screen.. No active warnings. Visually, the scene shows: **Scene Understanding/Description:**
+- Exact device name: ASUS Laptop (likely a ZenBook or Vivobook series based on design)
+- Brand/model: ASUS (brand visible on the bottom bezel of the laptop)
+- Visible components/parts:
+  - Laptop screen displaying a code editor (likely VS Code) with Python script open.
+  - Keyboard with visible keys and trackpad.
+  - ASUS logo on the bottom bezel of the laptop.
+  - Two stickers on the bottom front edge of the laptop (likely warranty or certification stickers).
+  - External mouse and mousepad partially visible on the left side of the desk.
+  - A black office chair partially visible behind the laptop.
+  - A window with bars in the background.
+- Current operational state: The laptop is powered on and actively being used (code editor is open and appears to be in use).
+- Any visible damage or abnormalities: No visible damage or abnormalities are apparent in the image.
+
+---
+
+**Object Detection:**
+```json
+{
+  "detections": [
+    {
+      "label": "Laptop Screen",
+      "bbox": [0.15, 0.15, 0.85, 0.45]
+    },
+    {
+      "label": "Laptop Keyboard",
+      "bbox": [0.15, 0.55, 0.85, 0.85]
+    },
+    {
+      "label": "Trackpad",
+      "bbox": [0.45, 0.80, 0.65, 0.88]
+    },
+    {
+      "label": "ASUS Logo",
+      "bbox": [0.40, 0.85, 0.50, 0.88]
+    },
+    {
+      "label": "Sticker (bottom front left)",
+      "bbox": [0.25, 0.88, 0.30, 0.95]
+    },
+    {
+      "label": "Sticker (bottom front right)",
+      "bbox": [0.35, 0.88, 0.40, 0.95]
+    },
+    {
+      "label": "Mouse",
+      "bbox": [0.05, 0.60, 0.15, 0.70]
+    },
+    {
+      "label": "Mousepad",
+      "bbox": [0.00, 0.65, 0.15, 0.75]
+    },
+    {
+      "label": "Office Chair",
+      "bbox": [0.20, 0.00, 0.55, 0.30]
+    },
+    {
+      "label": "Window with bars",
+      "bbox": [0.60, 0.00, 0.85, 0.30]
+    }
+  ]
+}
+```
+2026-07-06 12:38:39 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 429 Too Many Requests"
+2026-07-06 12:38:39 [INFO] [Detector] Routing LLM 429 hit. Rotating Groq key...
+2026-07-06 12:38:39 [INFO] [Detector] Rotated Groq client to index 1
+2026-07-06 12:38:40 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:38:40 [INFO] [Backend] ⚡ Stream chunk: {"type": "tool_call", "name": "inspect_current_scene", "tool_call_id": "3470524e
+2026-07-06 12:38:43 [INFO] [Backend] 🖼️ Received tool frame upload for 3470524e-0426-48f4-9246-0f358461b2b1
+2026-07-06 12:38:43 [INFO] [Detector] Image prepared: 576x768, 3332280 → 53696 chars (1%)
+2026-07-06 12:38:45 [INFO] HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:38:45 [INFO] [Detector] Mistral Pixtral-12B responded (backoff attempt 1, key attempt 1).
+2026-07-06 12:38:45 [INFO] 
+[Backend] 🔄 SCENE MEMORY UPDATED via VLM Snapshot
+2026-07-06 12:38:45 [INFO]    ┣━ Change Type: no_change
+2026-07-06 12:38:45 [INFO]    ┣━ Current Scene Memory: A person is using an ASUS laptop with a touchpad, running a coding environment with multiple files open.
+2026-07-06 12:38:45 [INFO]    ┗━ Previous Scene Memory: None.
+2026-07-06 12:38:45 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:38:45 [INFO] [Backend] ⚡ Stream chunk: {"type": "ar_context", "highlight_target": null, "show_arrow": false}
+2026-07-06 12:38:45 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "I hear you, don't worry, I'm here to help!"}
+2026-07-06 12:38:45 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "What do you mean by 'my laptop is stuck'?"}
+2026-07-06 12:39:02 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:39:02 [INFO] [Backend] 🎤 Transcribed text: " My laptop is stuck. I am not able to recognize what to do." (Language: English)
+2026-07-06 12:39:03 [INFO] [Backend] 🎙️ Voice stream-chat: ' My laptop is stuck. I am not able to recognize what to do.' | scene_id=45657629-d649-4742-9cc4-e9d8fdf98b79 | lang=English
+2026-07-06 12:39:03 [INFO] [Backend] 📸 Scene summary received: {'device': 'ASUS Laptop', 'confidence': 0.9, 'currentState': 'An ASUS laptop is powered on and actively being used with a code editor open on the screen.', 'warnings': [], 'components': ['Laptop Screen', 'Laptop Keyboard', 'Trackpad', 'ASUS Logo', 'Sticker (bottom front left)', 'Sticker (bottom front right)', 'Mouse', 'Mousepad']}
+2026-07-06 12:39:03 [INFO] [Detector] 🧠 Generated Routing Context:
+The user is currently inspecting ASUS Laptop. The system is in An ASUS laptop is powered on and actively being used with a code editor open on the screen.. No active warnings. Visually, the scene shows: A person is using an ASUS laptop with a touchpad, running a coding environment with multiple files open.
+2026-07-06 12:39:04 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:39:04 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:39:04 [INFO] [Backend] ⚡ Stream chunk: {"type": "ar_context", "highlight_target": null, "show_arrow": false}
+2026-07-06 12:39:04 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "Don't worry, let's troubleshoot - can you tell me
+2026-07-06 12:39:16 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:39:16 [INFO] 
+[Backend] 💬 CONVERSATION CONTEXT UPDATED
+2026-07-06 12:39:16 [INFO]    ┗━ New Context: Current Context: User's laptop is stuck, and they're seeking assistance.
+
+Updated Context: User's laptop is stuck, and they're seeking assistance, with the assistant acknowledging their
+2026-07-06 12:39:23 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:39:23 [INFO] [Backend] 🎤 Transcribed text: " There are 100 processes running in the laptop and I am not able to remove them." (Language: English)
+2026-07-06 12:39:24 [INFO] [Backend] 🎙️ Voice stream-chat: ' There are 100 processes running in the laptop and I am not ' | scene_id=45657629-d649-4742-9cc4-e9d8fdf98b79 | lang=English
+2026-07-06 12:39:24 [INFO] [Backend] 📸 Scene summary received: {'device': 'ASUS Laptop', 'confidence': 0.9, 'currentState': 'An ASUS laptop is powered on and actively being used with a code editor open on the screen.', 'warnings': [], 'components': ['Laptop Screen', 'Laptop Keyboard', 'Trackpad', 'ASUS Logo', 'Sticker (bottom front left)', 'Sticker (bottom front right)', 'Mouse', 'Mousepad']}
+2026-07-06 12:39:24 [INFO] [Detector] 🧠 Generated Routing Context:
+The user is currently inspecting ASUS Laptop. The system is in An ASUS laptop is powered on and actively being used with a code editor open on the screen.. No active warnings. Visually, the scene shows: A person is using an ASUS laptop with a touchpad, running a coding environment with multiple files open.
+2026-07-06 12:39:24 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:39:25 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:39:25 [INFO] [Backend] ⚡ Stream chunk: {"type": "ar_context", "highlight_target": null, "show_arrow": false}
+2026-07-06 12:39:25 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "Whoa, 100 processes is a lot!"}
+2026-07-06 12:39:25 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "Try closing some of those coding files or restarti
+2026-07-06 12:39:34 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:39:34 [INFO] 
+[Backend] 💬 CONVERSATION CONTEXT UPDATED
+2026-07-06 12:39:34 [INFO]    ┗━ New Context: Current Goal: Troubleshoot laptop issue.
+Context: Laptop is stuck, user unsure of next steps.
+2026-07-06 12:39:41 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:39:41 [INFO] [Backend] 🎤 Transcribed text: " Show me where to go to kill these processes." (Language: English)
+2026-07-06 12:39:41 [INFO] [Detector] Warning: _ensure_jpeg failed: argument should be a bytes-like object or ASCII string, not 'NoneType'
+2026-07-06 12:39:41 [INFO] HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:39:41 [INFO] [Detector] Mistral API error: API error occurred: Status 400. Body: {"object":"error","message":"Image, 'data:image/jpeg;base64,None', could not be loaded as a valid image. Allowed formats are JPEG, PNG, WEBP, GIF, MPO, HEIF, AVIF, BMP, TIFF","type":"invalid_request_file","param":null,"code":"3310","raw_status_code":400}. Falling back to Groq Vision VLM...
+2026-07-06 12:39:42 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:39:42 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:39:42 [INFO] [Detector] Groq Vision VLM also failed: Error code: 400 - {'error': {'message': 'invalid image data', 'type': 'invalid_request_error'}}
+2026-07-06 12:39:43 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:39:47 [INFO] [Detector] Small image: 384x512, 19068 chars
+2026-07-06 12:39:47 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:39:47 [INFO] [Detector] Groq Vision VLM responded successfully.
+2026-07-06 12:39:50 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:39:50 [INFO] [Backend] 🎤 Transcribed text: " Point at the taskbar with your finger. Move closer." (Language: English)
+2026-07-06 12:39:52 [INFO] [Backend] 🎙️ Voice stream-chat: ' Point at the taskbar with your finger. Move closer.' | scene_id=45657629-d649-4742-9cc4-e9d8fdf98b79 | lang=English
+2026-07-06 12:39:52 [INFO] [Backend] 📸 Scene summary received: {'device': 'ASUS Laptop', 'confidence': 0.9, 'currentState': 'An ASUS laptop is powered on and actively being used with a code editor open on the screen.', 'warnings': [], 'components': ['Laptop Screen', 'Laptop Keyboard', 'Trackpad', 'ASUS Logo', 'Sticker (bottom front left)', 'Sticker (bottom front right)', 'Mouse', 'Mousepad']}
+2026-07-06 12:39:52 [INFO] [Detector] 🧠 Generated Routing Context:
+The user is currently inspecting ASUS Laptop. The system is in An ASUS laptop is powered on and actively being used with a code editor open on the screen.. No active warnings. Visually, the scene shows: A person is using an ASUS laptop with a touchpad, running a coding environment with multiple files open.
+2026-07-06 12:39:53 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:39:53 [INFO] [Backend] ⚡ Stream chunk: {"type": "tool_call", "name": "inspect_current_scene", "tool_call_id": "c0623d3c
+2026-07-06 12:39:55 [INFO] [Backend] 🖼️ Received tool frame upload for c0623d3c-11cc-46d2-a662-f48acd90fe98
+2026-07-06 12:39:55 [INFO] [Detector] Image prepared: 576x768, 3096968 → 47208 chars (1%)
+2026-07-06 12:39:55 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:39:55 [INFO] 
+[Backend] 💬 CONVERSATION CONTEXT UPDATED
+2026-07-06 12:39:55 [INFO]    ┗━ New Context: Current Context: 
+User's laptop is stuck, and they're seeking assistance from the assistant who acknowledged their issue.
+
+Current Goal: 
+Close unnecessary processes to free up laptop resources
+2026-07-06 12:39:57 [INFO] HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:39:57 [INFO] [Detector] Mistral Pixtral-12B responded (backoff attempt 1, key attempt 1).
+2026-07-06 12:39:57 [INFO] 
+[Backend] 🔄 SCENE MEMORY UPDATED via VLM Snapshot
+2026-07-06 12:39:57 [INFO]    ┣━ Change Type: no_change
+2026-07-06 12:39:57 [INFO]    ┣━ Current Scene Memory: A person is using an ASUS laptop with a terminal or command prompt open, typing on the touchpad.
+2026-07-06 12:39:57 [INFO]    ┗━ Previous Scene Memory: None.
+2026-07-06 12:39:57 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:39:57 [INFO] [Backend] ⚡ Stream chunk: {"type": "ar_context", "highlight_target": null, "show_arrow": false}
+2026-07-06 12:39:57 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "I see you're using the touchpad, can you please po
+2026-07-06 12:40:04 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:40:04 [INFO] [Backend] 🎤 Transcribed text: " Is it fine?" (Language: English)
+2026-07-06 12:40:05 [INFO] [Backend] 🎙️ Voice stream-chat: ' Is it fine?' | scene_id=45657629-d649-4742-9cc4-e9d8fdf98b79 | lang=English
+2026-07-06 12:40:05 [INFO] [Backend] 📸 Scene summary received: {'device': 'ASUS Laptop', 'confidence': 0.9, 'currentState': 'An ASUS laptop is powered on and actively being used with a code editor open on the screen.', 'warnings': [], 'components': ['Laptop Screen', 'Laptop Keyboard', 'Trackpad', 'ASUS Logo', 'Sticker (bottom front left)', 'Sticker (bottom front right)', 'Mouse', 'Mousepad']}
+2026-07-06 12:40:05 [INFO] [Detector] 🧠 Generated Routing Context:
+The user is currently inspecting ASUS Laptop. The system is in An ASUS laptop is powered on and actively being used with a code editor open on the screen.. No active warnings. Visually, the scene shows: A person is using an ASUS laptop with a terminal or command prompt open, typing on the touchpad.
+2026-07-06 12:40:06 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:40:06 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:40:06 [INFO] [Backend] ⚡ Stream chunk: {"type": "ar_context", "highlight_target": null, "show_arrow": false}
+2026-07-06 12:40:06 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "Honestly, it doesn't look fine, you've got a termi
+2026-07-06 12:40:24 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:40:24 [INFO] [Backend] 🎤 Transcribed text: " Yes, yes, please go ahead." (Language: English)
+2026-07-06 12:40:25 [INFO] [Detector] Warning: _ensure_jpeg failed: argument should be a bytes-like object or ASCII string, not 'NoneType'
+2026-07-06 12:40:25 [INFO] HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:40:25 [INFO] [Detector] Mistral API error: API error occurred: Status 400. Body: {"object":"error","message":"Image, 'data:image/jpeg;base64,None', could not be loaded as a valid image. Allowed formats are JPEG, PNG, WEBP, GIF, MPO, HEIF, AVIF, BMP, TIFF","type":"invalid_request_file","param":null,"code":"3310","raw_status_code":400}. Falling back to Groq Vision VLM...
+2026-07-06 12:40:26 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:40:26 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:40:26 [INFO] [Detector] Groq Vision VLM also failed: Error code: 400 - {'error': {'message': 'invalid image data', 'type': 'invalid_request_error'}}
+2026-07-06 12:40:27 [INFO] [Backend] 🎙️ Voice stream-chat: ' Yes, yes, please go ahead.' | scene_id=45657629-d649-4742-9cc4-e9d8fdf98b79 | lang=English
+2026-07-06 12:40:27 [INFO] [Backend] 📸 Scene summary received: {'device': 'ASUS Laptop', 'confidence': 0.9, 'currentState': 'An ASUS laptop is powered on and actively being used with a code editor open on the screen.', 'warnings': [], 'components': ['Laptop Screen', 'Laptop Keyboard', 'Trackpad', 'ASUS Logo', 'Sticker (bottom front left)', 'Sticker (bottom front right)', 'Mouse', 'Mousepad']}
+2026-07-06 12:40:27 [INFO] [Detector] 🧠 Generated Routing Context:
+The user is currently inspecting ASUS Laptop. The system is in An ASUS laptop is powered on and actively being used with a code editor open on the screen.. No active warnings. Visually, the scene shows: A person is using an ASUS laptop with a terminal or command prompt open, typing on the touchpad.
+2026-07-06 12:40:27 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:40:27 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:40:28 [INFO] [Backend] ⚡ Stream chunk: {"type": "ar_context", "highlight_target": null, "show_arrow": false}
+2026-07-06 12:40:28 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "Let's get that laptop unstuck, shall we?"}
+2026-07-06 12:40:28 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "I'll guide you through closing some unnecessary pr
+2026-07-06 12:40:28 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:40:28 [INFO] 
+[Backend] 💬 CONVERSATION CONTEXT UPDATED
+2026-07-06 12:40:28 [INFO]    ┗━ New Context: Current Goal: Troubleshoot laptop issue.
+Context: Laptop is stuck, user unsure of next steps, using touchpad.
+2026-07-06 12:40:34 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:40:34 [INFO] [Backend] 🎤 Transcribed text: " Please start. Please start." (Language: English)
+2026-07-06 12:40:34 [INFO] [Detector] Warning: _ensure_jpeg failed: argument should be a bytes-like object or ASCII string, not 'NoneType'
+2026-07-06 12:40:35 [INFO] HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:40:35 [INFO] [Detector] Mistral API error: API error occurred: Status 400. Body: {"object":"error","message":"Image, 'data:image/jpeg;base64,None', could not be loaded as a valid image. Allowed formats are JPEG, PNG, WEBP, GIF, MPO, HEIF, AVIF, BMP, TIFF","type":"invalid_request_file","param":null,"code":"3310","raw_status_code":400}. Falling back to Groq Vision VLM...
+2026-07-06 12:40:35 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:40:35 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:40:35 [INFO] [Detector] Groq Vision VLM also failed: Error code: 400 - {'error': {'message': 'invalid image data', 'type': 'invalid_request_error'}}
+2026-07-06 12:40:36 [INFO] [Backend] 🎙️ Voice stream-chat: ' Please start. Please start.' | scene_id=45657629-d649-4742-9cc4-e9d8fdf98b79 | lang=English
+2026-07-06 12:40:36 [INFO] [Backend] 📸 Scene summary received: {'device': 'ASUS Laptop', 'confidence': 0.9, 'currentState': 'An ASUS laptop is powered on and actively being used with a code editor open on the screen.', 'warnings': [], 'components': ['Laptop Screen', 'Laptop Keyboard', 'Trackpad', 'ASUS Logo', 'Sticker (bottom front left)', 'Sticker (bottom front right)', 'Mouse', 'Mousepad']}
+2026-07-06 12:40:36 [INFO] [Detector] 🧠 Generated Routing Context:
+The user is currently inspecting ASUS Laptop. The system is in An ASUS laptop is powered on and actively being used with a code editor open on the screen.. No active warnings. Visually, the scene shows: A person is using an ASUS laptop with a terminal or command prompt open, typing on the touchpad.
+2026-07-06 12:40:37 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:40:37 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:40:37 [INFO] [Backend] ⚡ Stream chunk: {"type": "ar_context", "highlight_target": null, "show_arrow": false}
+2026-07-06 12:40:37 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "It looks like your laptop is already on, what seem
+2026-07-06 12:40:50 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:40:50 [INFO] [Backend] 🎤 Transcribed text: " Yes, it is freezing." (Language: English)
+2026-07-06 12:40:52 [INFO] [Backend] 🎙️ Voice stream-chat: ' Yes, it is freezing.' | scene_id=45657629-d649-4742-9cc4-e9d8fdf98b79 | lang=English
+2026-07-06 12:40:52 [INFO] [Backend] 📸 Scene summary received: {'device': 'ASUS Laptop', 'confidence': 0.9, 'currentState': 'An ASUS laptop is powered on and actively being used with a code editor open on the screen.', 'warnings': [], 'components': ['Laptop Screen', 'Laptop Keyboard', 'Trackpad', 'ASUS Logo', 'Sticker (bottom front left)', 'Sticker (bottom front right)', 'Mouse', 'Mousepad']}
+2026-07-06 12:40:52 [INFO] [Detector] 🧠 Generated Routing Context:
+The user is currently inspecting ASUS Laptop. The system is in An ASUS laptop is powered on and actively being used with a code editor open on the screen.. No active warnings. Visually, the scene shows: A person is using an ASUS laptop with a terminal or command prompt open, typing on the touchpad.
+2026-07-06 12:40:52 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:40:53 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:40:53 [INFO] [Backend] ⚡ Stream chunk: {"type": "ar_context", "highlight_target": null, "show_arrow": false}
+2026-07-06 12:40:53 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "That's frustrating!"}
+2026-07-06 12:40:53 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "Try restarting it or closing some resource-intensi
+2026-07-06 12:40:58 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:40:58 [INFO] 
+[Backend] 💬 CONVERSATION CONTEXT UPDATED
+2026-07-06 12:40:58 [INFO]    ┗━ New Context: Current Context: 
+User's laptop is stuck, and the assistant is guiding them to close unnecessary processes.
+
+Current Goal: 
+Close unnecessary processes to free up laptop resources and troub
+2026-07-06 12:41:08 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:41:08 [INFO] 
+[Backend] 💬 CONVERSATION CONTEXT UPDATED
+2026-07-06 12:41:08 [INFO]    ┗━ New Context: Updated Context: 
+Current Goal: Troubleshoot laptop issue.
+Context: Laptop is stuck, user unsure of next steps, using touchpad.
+User's concern: Laptop is
+2026-07-06 12:41:10 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:41:10 [INFO] [Backend] 🎤 Transcribed text: " Honestly, you're not helping me at all." (Language: English)
+2026-07-06 12:41:10 [INFO] [Detector] Warning: _ensure_jpeg failed: argument should be a bytes-like object or ASCII string, not 'NoneType'
+2026-07-06 12:41:11 [INFO] HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:41:11 [INFO] [Detector] Mistral API error: API error occurred: Status 400. Body: {"object":"error","message":"Image, 'data:image/jpeg;base64,None', could not be loaded as a valid image. Allowed formats are JPEG, PNG, WEBP, GIF, MPO, HEIF, AVIF, BMP, TIFF","type":"invalid_request_file","param":null,"code":"3310","raw_status_code":400}. Falling back to Groq Vision VLM...
+2026-07-06 12:41:11 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:41:11 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:41:11 [INFO] [Detector] Groq Vision VLM also failed: Error code: 400 - {'error': {'message': 'invalid image data', 'type': 'invalid_request_error'}}
+2026-07-06 12:41:12 [INFO] [Backend] 🎙️ Voice stream-chat: ' Honestly, you're not helping me at all.' | scene_id=45657629-d649-4742-9cc4-e9d8fdf98b79 | lang=English
+2026-07-06 12:41:12 [INFO] [Backend] 📸 Scene summary received: {'device': 'ASUS Laptop', 'confidence': 0.9, 'currentState': 'An ASUS laptop is powered on and actively being used with a code editor open on the screen.', 'warnings': [], 'components': ['Laptop Screen', 'Laptop Keyboard', 'Trackpad', 'ASUS Logo', 'Sticker (bottom front left)', 'Sticker (bottom front right)', 'Mouse', 'Mousepad']}
+2026-07-06 12:41:12 [INFO] [Detector] 🧠 Generated Routing Context:
+The user is currently inspecting ASUS Laptop. The system is in An ASUS laptop is powered on and actively being used with a code editor open on the screen.. No active warnings. Visually, the scene shows: A person is using an ASUS laptop with a terminal or command prompt open, typing on the touchpad.
+2026-07-06 12:41:13 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:41:13 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:41:13 [INFO] [Backend] ⚡ Stream chunk: {"type": "ar_context", "highlight_target": null, "show_arrow": false}
+2026-07-06 12:41:13 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "Let's start fresh, what seems to be the issue with
+2026-07-06 12:41:24 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:41:24 [INFO] 
+[Backend] 💬 CONVERSATION CONTEXT UPDATED
+2026-07-06 12:41:24 [INFO]    ┗━ New Context: Updated Context: 
+Current Goal: Troubleshoot laptop issue.
+Context: Laptop is freezing, user unsure of next steps, using touchpad, tried restarting and closing programs.
+2026-07-06 12:41:26 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:41:26 [INFO] [Backend] 🎤 Transcribed text: " Yes, it is freezing. I have told you the hundredth time." (Language: English)
+2026-07-06 12:41:26 [INFO] [Detector] Warning: _ensure_jpeg failed: argument should be a bytes-like object or ASCII string, not 'NoneType'
+2026-07-06 12:41:27 [INFO] HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:41:27 [INFO] [Detector] Mistral API error: API error occurred: Status 400. Body: {"object":"error","message":"Image, 'data:image/jpeg;base64,None', could not be loaded as a valid image. Allowed formats are JPEG, PNG, WEBP, GIF, MPO, HEIF, AVIF, BMP, TIFF","type":"invalid_request_file","param":null,"code":"3310","raw_status_code":400}. Falling back to Groq Vision VLM...
+2026-07-06 12:41:27 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:41:27 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:41:27 [INFO] [Detector] Groq Vision VLM also failed: Error code: 400 - {'error': {'message': 'invalid image data', 'type': 'invalid_request_error'}}
+2026-07-06 12:41:28 [INFO] [Backend] 🎙️ Voice stream-chat: ' Yes, it is freezing. I have told you the hundredth time.' | scene_id=45657629-d649-4742-9cc4-e9d8fdf98b79 | lang=English
+2026-07-06 12:41:28 [INFO] [Backend] 📸 Scene summary received: {'device': 'ASUS Laptop', 'confidence': 0.9, 'currentState': 'An ASUS laptop is powered on and actively being used with a code editor open on the screen.', 'warnings': [], 'components': ['Laptop Screen', 'Laptop Keyboard', 'Trackpad', 'ASUS Logo', 'Sticker (bottom front left)', 'Sticker (bottom front right)', 'Mouse', 'Mousepad']}
+2026-07-06 12:41:28 [INFO] [Detector] 🧠 Generated Routing Context:
+The user is currently inspecting ASUS Laptop. The system is in An ASUS laptop is powered on and actively being used with a code editor open on the screen.. No active warnings. Visually, the scene shows: A person is using an ASUS laptop with a terminal or command prompt open, typing on the touchpad.
+2026-07-06 12:41:29 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:41:29 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:41:30 [INFO] [Backend] ⚡ Stream chunk: {"type": "ar_context", "highlight_target": null, "show_arrow": false}
+2026-07-06 12:41:30 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "Alright, so it's freezing again, huh?"}
+2026-07-06 12:41:30 [INFO] [Backend] ⚡ Stream chunk: {"type": "sentence", "text": "Let's try checking for any software updates or mal
+2026-07-06 12:41:43 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:41:43 [INFO] 
+[Backend] 💬 CONVERSATION CONTEXT UPDATED
+2026-07-06 12:41:43 [INFO]    ┗━ New Context: Updated Context: 
+Current Goal: Troubleshoot laptop issue.
+Context: Laptop is stuck, user unsure of next steps, using touchpad.
+User's concern: Laptop is
+2026-07-06 12:41:51 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:41:51 [INFO] [Backend] 🎤 Transcribed text: " How to check?" (Language: English)
+2026-07-06 12:41:51 [INFO] [Detector] Warning: _ensure_jpeg failed: argument should be a bytes-like object or ASCII string, not 'NoneType'
+2026-07-06 12:41:52 [INFO] HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:41:52 [INFO] [Detector] Mistral API error: API error occurred: Status 400. Body: {"object":"error","message":"Image, 'data:image/jpeg;base64,None', could not be loaded as a valid image. Allowed formats are JPEG, PNG, WEBP, GIF, MPO, HEIF, AVIF, BMP, TIFF","type":"invalid_request_file","param":null,"code":"3310","raw_status_code":400}. Falling back to Groq Vision VLM...
+2026-07-06 12:41:52 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:41:52 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-07-06 12:41:52 [INFO] [Detector] Groq Vision VLM also failed: Error code: 400 - {'error': {'message': 'invalid image data', 'type': 'invalid_request_error'}}
+2026-07-06 12:41:53 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:41:55 [INFO] [Detector] Small image: 384x512, 16552 chars
+2026-07-06 12:41:56 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:41:56 [INFO] [Detector] Groq Vision VLM responded successfully.
+2026-07-06 12:42:00 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:42:00 [INFO] 
+[Backend] 💬 CONVERSATION CONTEXT UPDATED
+2026-07-06 12:42:00 [INFO]    ┗━ New Context: Updated Context: 
+Current Goal: Troubleshoot laptop issue.
+Context: Laptop is freezing, user frustrated, tried restarting and closing programs, checking for updates suggested.
+2026-07-06 12:42:08 [INFO] 1 change detected
+2026-07-06 12:42:08 [INFO] 1 change detected
+2026-07-06 12:42:09 [INFO] 1 change detected
+2026-07-06 12:42:09 [INFO] 1 change detected
+2026-07-06 12:42:09 [INFO] 1 change detected
+2026-07-06 12:42:10 [INFO] 1 change detected
+2026-07-06 12:42:10 [INFO] 1 change detected
+2026-07-06 12:42:10 [INFO] 1 change detected
+2026-07-06 12:42:11 [INFO] 1 change detected
+2026-07-06 12:42:11 [INFO] 1 change detected
+2026-07-06 12:42:12 [INFO] 1 change detected
+2026-07-06 12:42:12 [INFO] 1 change detected
+2026-07-06 12:42:12 [INFO] 1 change detected
+2026-07-06 12:42:13 [INFO] 1 change detected
+2026-07-06 12:42:13 [INFO] 1 change detected
+2026-07-06 12:42:13 [INFO] 1 change detected
+2026-07-06 12:42:14 [INFO] 1 change detected
+2026-07-06 12:42:14 [INFO] 1 change detected
+2026-07-06 12:42:14 [INFO] 1 change detected
+2026-07-06 12:42:15 [INFO] 1 change detected
+2026-07-06 12:42:15 [INFO] 1 change detected
+2026-07-06 12:42:16 [INFO] 1 change detected
+2026-07-06 12:42:16 [INFO] 1 change detected
+2026-07-06 12:42:16 [INFO] 1 change detected
+2026-07-06 12:42:17 [INFO] 1 change detected
+2026-07-06 12:42:17 [INFO] 1 change detected
+2026-07-06 12:42:17 [INFO] 1 change detected
+2026-07-06 12:42:18 [INFO] 1 change detected
+2026-07-06 12:42:18 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:42:18 [INFO] [Backend] 🎤 Transcribed text: " Point at the laptop screen with your finger. Got it. Moving to next step. Sir, what we have to do here is, when it says moving to next step, we had installed AR in this before. In which it points at the screen that you have to click here. So, this next step was going. That AR works properly." (Language: English)
+2026-07-06 12:42:18 [INFO] 1 change detected
+2026-07-06 12:42:18 [INFO] 1 change detected
+2026-07-06 12:42:19 [INFO] 1 change detected
+2026-07-06 12:42:19 [INFO] 1 change detected
+2026-07-06 12:42:20 [INFO] 1 change detected
+2026-07-06 12:42:20 [INFO] 1 change detected
+2026-07-06 12:42:20 [INFO] 1 change detected
+2026-07-06 12:42:21 [INFO] 1 change detected
+2026-07-06 12:42:21 [INFO] 1 change detected
+2026-07-06 12:42:21 [INFO] 1 change detected
+2026-07-06 12:42:22 [INFO] 1 change detected
+2026-07-06 12:42:22 [INFO] 1 change detected
+2026-07-06 12:42:22 [INFO] 1 change detected
+2026-07-06 12:42:23 [INFO] 1 change detected
+2026-07-06 12:42:23 [INFO] 1 change detected
+2026-07-06 12:42:24 [INFO] 1 change detected
+2026-07-06 12:42:24 [INFO] 1 change detected
+2026-07-06 12:42:24 [INFO] 1 change detected
+2026-07-06 12:42:25 [INFO] 1 change detected
+2026-07-06 12:42:25 [INFO] 1 change detected
+2026-07-06 12:42:25 [INFO] 1 change detected
+2026-07-06 12:42:26 [INFO] 1 change detected
+2026-07-06 12:42:26 [INFO] 1 change detected
+2026-07-06 12:42:26 [INFO] 1 change detected
+2026-07-06 12:42:27 [INFO] 1 change detected
+2026-07-06 12:42:27 [INFO] 1 change detected
+2026-07-06 12:42:28 [INFO] 1 change detected
+2026-07-06 12:42:28 [INFO] 1 change detected
+2026-07-06 12:42:28 [INFO] 1 change detected
+2026-07-06 12:42:29 [INFO] 1 change detected
+2026-07-06 12:42:29 [INFO] 1 change detected
+2026-07-06 12:42:29 [INFO] 1 change detected
+2026-07-06 12:42:30 [INFO] 1 change detected
+2026-07-06 12:42:30 [INFO] 1 change detected
+2026-07-06 12:42:30 [INFO] 1 change detected
+2026-07-06 12:42:31 [INFO] 1 change detected
+2026-07-06 12:42:31 [INFO] 1 change detected
+2026-07-06 12:42:31 [INFO] 1 change detected
+2026-07-06 12:42:32 [INFO] 1 change detected
+2026-07-06 12:42:32 [INFO] 1 change detected
+2026-07-06 12:42:33 [INFO] 1 change detected
+2026-07-06 12:42:33 [INFO] 1 change detected
+2026-07-06 12:42:33 [INFO] 1 change detected
+2026-07-06 12:42:34 [INFO] 1 change detected
+2026-07-06 12:42:34 [INFO] 1 change detected
+2026-07-06 12:42:34 [INFO] 1 change detected
+2026-07-06 12:42:35 [INFO] 1 change detected
+2026-07-06 12:42:35 [INFO] 1 change detected
+2026-07-06 12:42:35 [INFO] 1 change detected
+2026-07-06 12:42:36 [INFO] 1 change detected
+2026-07-06 12:42:36 [INFO] 1 change detected
+2026-07-06 12:42:36 [INFO] 1 change detected
+2026-07-06 12:42:37 [INFO] 1 change detected
+2026-07-06 12:42:37 [INFO] 1 change detected
+2026-07-06 12:42:38 [INFO] 1 change detected
+2026-07-06 12:42:38 [INFO] 1 change detected
+2026-07-06 12:42:38 [INFO] 1 change detected
+2026-07-06 12:42:39 [INFO] 1 change detected
+2026-07-06 12:42:39 [INFO] 1 change detected
+2026-07-06 12:42:39 [INFO] 1 change detected
+2026-07-06 12:42:40 [INFO] 1 change detected
+2026-07-06 12:42:40 [INFO] 1 change detected
+2026-07-06 12:42:40 [INFO] 1 change detected
+2026-07-06 12:42:41 [INFO] 1 change detected
+2026-07-06 12:42:41 [INFO] 1 change detected
+2026-07-06 12:42:42 [INFO] 1 change detected
+2026-07-06 12:42:42 [INFO] 1 change detected
+2026-07-06 12:42:42 [INFO] 1 change detected
+2026-07-06 12:42:43 [INFO] 1 change detected
+2026-07-06 12:42:43 [INFO] 1 change detected
+2026-07-06 12:42:43 [INFO] 1 change detected
+2026-07-06 12:42:44 [INFO] 1 change detected
+2026-07-06 12:42:44 [INFO] 1 change detected
+2026-07-06 12:42:44 [INFO] 1 change detected
+2026-07-06 12:42:45 [INFO] 1 change detected
+2026-07-06 12:42:45 [INFO] 1 change detected
+2026-07-06 12:42:46 [INFO] 1 change detected
+2026-07-06 12:42:46 [INFO] 1 change detected
+2026-07-06 12:42:46 [INFO] 1 change detected
+2026-07-06 12:42:47 [INFO] 1 change detected
+2026-07-06 12:42:47 [INFO] 1 change detected
+2026-07-06 12:42:47 [INFO] 1 change detected
+2026-07-06 12:42:48 [INFO] 1 change detected
+2026-07-06 12:42:48 [INFO] 1 change detected
+2026-07-06 12:42:48 [INFO] 1 change detected
+2026-07-06 12:42:49 [INFO] 1 change detected
+2026-07-06 12:42:49 [INFO] 1 change detected
+2026-07-06 12:42:50 [INFO] 1 change detected
+2026-07-06 12:42:50 [INFO] 1 change detected
+2026-07-06 12:42:50 [INFO] 1 change detected
+2026-07-06 12:42:51 [INFO] 1 change detected
+2026-07-06 12:42:51 [INFO] 1 change detected
+2026-07-06 12:42:51 [INFO] 1 change detected
+2026-07-06 12:42:52 [INFO] 1 change detected
+2026-07-06 12:42:52 [INFO] 1 change detected
+2026-07-06 12:42:52 [INFO] 1 change detected
+2026-07-06 12:42:53 [INFO] 1 change detected
+2026-07-06 12:42:53 [INFO] 1 change detected
+2026-07-06 12:42:53 [INFO] 1 change detected
+2026-07-06 12:42:54 [INFO] 1 change detected
+2026-07-06 12:42:54 [INFO] 1 change detected
+2026-07-06 12:42:55 [INFO] 1 change detected
+2026-07-06 12:42:55 [INFO] 1 change detected
+2026-07-06 12:42:55 [INFO] 1 change detected
+2026-07-06 12:42:56 [INFO] 1 change detected
+2026-07-06 12:42:56 [INFO] 1 change detected
+2026-07-06 12:42:56 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/audio/transcriptions "HTTP/1.1 200 OK"
+2026-07-06 12:42:56 [INFO] [Backend] 🎤 Transcribed text: " How to implement AR? How to implement AR? Sir, we are detecting the angle head with YOLO. It takes coordinates and gets confused again and again. Or the mobile phone moves a little and forgets the coordinates. So the angle head is not being able to be there. So we have to lock the coordinates. Yes, because the user can't keep the phone freezed. It is a very important thing to keep in mind." (Language: English)
+2026-07-06 12:42:56 [INFO] 1 change detected
+2026-07-06 12:42:57 [INFO] 1 change detected
+2026-07-06 12:42:57 [INFO] 1 change detected
+2026-07-06 12:42:57 [INFO] 1 change detected
+2026-07-06 12:42:58 [INFO] 1 change detected
+2026-07-06 12:42:58 [INFO] 1 change detected
+2026-07-06 12:42:58 [INFO] HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-07-06 12:42:59 [INFO] 1 change detected
+2026-07-06 12:42:59 [INFO] 1 change detected
+2026-07-06 12:42:59 [INFO] 1 change detected
+2026-07-06 12:43:00 [INFO] 1 change detected
+2026-07-06 12:43:00 [INFO] 1 change detected
+2026-07-06 12:43:00 [INFO] 1 change detected
+2026-07-06 12:43:01 [INFO] 1 change detected
+2026-07-06 12:43:01 [INFO] 1 change detected
+2026-07-06 12:43:01 [INFO] 1 change detected
+2026-07-06 12:43:02 [INFO] 1 change detected
+2026-07-06 12:43:02 [INFO] 1 change detected
+2026-07-06 12:43:03 [INFO] 1 change detected
+2026-07-06 12:43:03 [INFO] 1 change detected
+2026-07-06 12:43:03 [INFO] 1 change detected
+2026-07-06 12:43:04 [INFO] 1 change detected
+2026-07-06 12:43:04 [INFO] 1 change detected
+2026-07-06 12:43:04 [INFO] 1 change detected
+2026-07-06 12:43:05 [INFO] 1 change detected
+2026-07-06 12:43:05 [INFO] 1 change detected
+2026-07-06 12:43:05 [INFO] 1 change detected
+2026-07-06 12:43:06 [INFO] 1 change detected
+2026-07-06 12:43:06 [INFO] 1 change detected
+2026-07-06 12:43:06 [INFO] 1 change detected
+2026-07-06 12:43:07 [INFO] 1 change detected
+2026-07-06 12:43:07 [INFO] 1 change detected
+2026-07-06 12:43:08 [INFO] 1 change detected
+2026-07-06 12:43:08 [INFO] 1 change detected
+2026-07-06 12:43:08 [INFO] 1 change detected
+2026-07-06 12:43:09 [INFO] 1 change detected
+2026-07-06 12:43:09 [INFO] 1 change detected
+2026-07-06 12:43:09 [INFO] 1 change detected
+2026-07-06 12:43:10 [INFO] 1 change detected
+2026-07-06 12:43:10 [INFO] 1 change detected
+2026-07-06 12:43:10 [INFO] 1 change detected
+2026-07-06 12:43:11 [INFO] 1 change detected
+2026-07-06 12:43:11 [INFO] 1 change detected
+2026-07-06 12:43:12 [INFO] 1 change detected
+2026-07-06 12:43:12 [INFO] 1 change detected
+2026-07-06 12:43:12 [INFO] 1 change detected
+2026-07-06 12:43:13 [INFO] 1 change detected
+2026-07-06 12:43:13 [INFO] 1 change detected
+2026-07-06 12:43:13 [INFO] 1 change detected
+2026-07-06 12:43:14 [INFO] 1 change detected
+2026-07-06 12:43:14 [INFO] 1 change detected
+2026-07-06 12:43:14 [INFO] 1 change detected
+2026-07-06 12:43:15 [INFO] 1 change detected
+2026-07-06 12:43:15 [INFO] 1 change detected
+2026-07-06 12:43:16 [INFO] 1 change detected
+2026-07-06 12:43:16 [INFO] 1 change detected
+2026-07-06 12:43:16 [INFO] 1 change detected
+2026-07-06 12:43:17 [INFO] 1 change detected
+2026-07-06 12:43:17 [INFO] 1 change detected
+2026-07-06 12:43:17 [INFO] 1 change detected
+2026-07-06 12:43:18 [INFO] 1 change detected
+2026-07-06 12:43:18 [INFO] 1 change detected
+2026-07-06 12:43:18 [INFO] 1 change detected
+2026-07-06 12:43:19 [INFO] 1 change detected
+2026-07-06 12:43:19 [INFO] 1 change detected
+2026-07-06 12:43:20 [INFO] 1 change detected
+2026-07-06 12:43:20 [INFO] 1 change detected
+2026-07-06 12:43:20 [INFO] 1 change detected
+2026-07-06 12:43:21 [INFO] 1 change detected
+2026-07-06 12:43:21 [INFO] 1 change detected
+2026-07-06 12:43:21 [INFO] 1 change detected
+2026-07-06 12:43:22 [INFO] 1 change detected
+2026-07-06 12:43:22 [INFO] 1 change detected
+2026-07-06 12:43:22 [INFO] 1 change detected
+2026-07-06 12:43:23 [INFO] 1 change detected
+2026-07-06 12:43:23 [INFO] 1 change detected
+2026-07-06 12:43:24 [INFO] 1 change detected
+2026-07-06 12:43:24 [INFO] 1 change detected
+2026-07-06 12:43:24 [INFO] 1 change detected
+2026-07-06 12:43:25 [INFO] 1 change detected
+2026-07-06 12:43:25 [INFO] 1 change detected
+2026-07-06 12:43:25 [INFO] 1 change detected
+2026-07-06 12:43:26 [INFO] 1 change detected
+2026-07-06 12:43:26 [INFO] 1 change detected
+2026-07-06 12:43:26 [INFO] 1 change detected
+2026-07-06 12:43:27 [INFO] 1 change detected
+2026-07-06 12:43:27 [INFO] 1 change detected
+2026-07-06 12:43:28 [INFO] 1 change detected
+2026-07-06 12:43:28 [INFO] 1 change detected
+2026-07-06 12:43:28 [INFO] 1 change detected
+2026-07-06 12:43:29 [INFO] 1 change detected
+2026-07-06 12:43:29 [INFO] 1 change detected
+2026-07-06 12:43:29 [INFO] 1 change detected
+2026-07-06 12:43:30 [INFO] 1 change detected
+2026-07-06 12:43:30 [INFO] 1 change detected
+2026-07-06 12:43:30 [INFO] 1 change detected
+2026-07-06 12:43:31 [INFO] 1 change detected
+2026-07-06 12:43:31 [INFO] 1 change detected
+2026-07-06 12:43:32 [INFO] 1 change detected
+2026-07-06 12:43:32 [INFO] 1 change detected
+2026-07-06 12:43:32 [INFO] 1 change detected
+2026-07-06 12:43:33 [INFO] 1 change detected
+2026-07-06 12:43:33 [INFO] 1 change detected
+2026-07-06 12:43:33 [INFO] 1 change detected
+2026-07-06 12:43:34 [INFO] 1 change detected
+2026-07-06 12:43:34 [INFO] 1 change detected
+2026-07-06 12:43:34 [INFO] 1 change detected
+2026-07-06 12:43:35 [INFO] 1 change detected
+2026-07-06 12:43:35 [INFO] 1 change detected
+2026-07-06 12:43:35 [INFO] 1 change detected
+2026-07-06 12:43:36 [INFO] 1 change detected
+2026-07-06 12:43:36 [INFO] 1 change detected
+2026-07-06 12:43:37 [INFO] 1 change detected
+2026-07-06 12:43:37 [INFO] 1 change detected
+2026-07-06 12:43:37 [INFO] 1 change detected
+2026-07-06 12:43:38 [INFO] 1 change detected
+2026-07-06 12:43:38 [INFO] 1 change detected
+2026-07-06 12:43:38 [INFO] 1 change detected
+2026-07-06 12:43:39 [INFO] 1 change detected
+2026-07-06 12:43:39 [INFO] 1 change detected
+2026-07-06 12:43:40 [INFO] 1 change detected
+2026-07-06 12:43:40 [INFO] 1 change detected
+2026-07-06 12:43:40 [INFO] 1 change detected
+2026-07-06 12:43:41 [INFO] 1 change detected
+2026-07-06 12:43:41 [INFO] 1 change detected
+2026-07-06 12:43:41 [INFO] 1 change detected
+2026-07-06 12:43:42 [INFO] 1 change detected
+2026-07-06 12:43:42 [INFO] 1 change detected
+2026-07-06 12:43:42 [INFO] 1 change detected
+2026-07-06 12:43:43 [INFO] 1 change detected
+2026-07-06 12:43:43 [INFO] 1 change detected
+2026-07-06 12:43:43 [INFO] 1 change detected
+2026-07-06 12:43:44 [INFO] 1 change detected
+2026-07-06 12:43:44 [INFO] 1 change detected
+2026-07-06 12:43:45 [INFO] 1 change detected
+2026-07-06 12:43:45 [INFO] 1 change detected
+2026-07-06 12:43:45 [INFO] 1 change detected
+2026-07-06 12:43:46 [INFO] 1 change detected
+2026-07-06 12:43:46 [INFO] 1 change detected
+2026-07-06 12:43:46 [INFO] 1 change detected
+2026-07-06 12:43:47 [INFO] 1 change detected
+2026-07-06 12:43:47 [INFO] 1 change detected
+2026-07-06 12:43:47 [INFO] 1 change detected
+2026-07-06 12:43:48 [INFO] 1 change detected
+2026-07-06 12:43:48 [INFO] 1 change detected
+2026-07-06 12:43:49 [INFO] 1 change detected
+2026-07-06 12:43:49 [INFO] 1 change detected
+2026-07-06 12:43:49 [INFO] 1 change detected
+2026-07-06 12:43:50 [INFO] 1 change detected
+2026-07-06 12:43:50 [INFO] 1 change detected
+2026-07-06 12:43:50 [INFO] 1 change detected
+2026-07-06 12:43:51 [INFO] 1 change detected
+2026-07-06 12:43:51 [INFO] 1 change detected
+2026-07-06 12:43:51 [INFO] 1 change detected
+2026-07-06 12:43:52 [INFO] 1 change detected
+2026-07-06 12:43:52 [INFO] 1 change detected
+2026-07-06 12:43:53 [INFO] 1 change detected
+2026-07-06 12:43:53 [INFO] 1 change detected
+2026-07-06 12:43:53 [INFO] 1 change detected
+2026-07-06 12:43:54 [INFO] 1 change detected
+2026-07-06 12:43:54 [INFO] 1 change detected
+2026-07-06 12:43:54 [INFO] 1 change detected
+2026-07-06 12:43:55 [INFO] 1 change detected
+2026-07-06 12:43:55 [INFO] 1 change detected
+2026-07-06 12:43:55 [INFO] 1 change detected
+2026-07-06 12:43:56 [INFO] 1 change detected
+2026-07-06 12:43:56 [INFO] 1 change detected
+2026-07-06 12:43:57 [INFO] 1 change detected
+2026-07-06 12:43:57 [INFO] 1 change detected
+2026-07-06 12:43:57 [INFO] 1 change detected
+2026-07-06 12:43:58 [INFO] 1 change detected
+2026-07-06 12:43:58 [INFO] 1 change detected
+2026-07-06 12:43:58 [INFO] 1 change detected
+2026-07-06 12:43:59 [INFO] 1 change detected
+2026-07-06 12:43:59 [INFO] 1 change detected
+2026-07-06 12:44:00 [INFO] 1 change detected
+2026-07-06 12:44:00 [INFO] 1 change detected
+2026-07-06 12:44:00 [INFO] 1 change detected
+2026-07-06 12:44:01 [INFO] 1 change detected
+2026-07-06 12:44:01 [INFO] 1 change detected
+2026-07-06 12:44:01 [INFO] 1 change detected
+2026-07-06 12:44:02 [INFO] 1 change detected
+2026-07-06 12:44:02 [INFO] 1 change detected
+2026-07-06 12:44:02 [INFO] 1 change detected
+2026-07-06 12:44:03 [INFO] 1 change detected
+2026-07-06 12:44:03 [INFO] 1 change detected
+2026-07-06 12:44:03 [INFO] 1 change detected
+2026-07-06 12:44:04 [INFO] 1 change detected
+2026-07-06 12:44:04 [INFO] 1 change detected
+2026-07-06 12:44:05 [INFO] 1 change detected
+2026-07-06 12:44:05 [INFO] 1 change detected
+2026-07-06 12:44:05 [INFO] 1 change detected
+2026-07-06 12:44:06 [INFO] 1 change detected
+2026-07-06 12:44:06 [INFO] 1 change detected
+2026-07-06 12:44:06 [INFO] 1 change detected
+2026-07-06 12:44:07 [INFO] 1 change detected
+2026-07-06 12:44:07 [INFO] 1 change detected
+2026-07-06 12:44:07 [INFO] 1 change detected
+2026-07-06 12:44:08 [INFO] 1 change detected
+2026-07-06 12:44:08 [INFO] 1 change detected
+2026-07-06 12:44:09 [INFO] 1 change detected
+2026-07-06 12:44:09 [INFO] 1 change detected
+2026-07-06 12:44:09 [INFO] 1 change detected
+2026-07-06 12:44:10 [INFO] 1 change detected
+2026-07-06 12:44:10 [INFO] 1 change detected
+2026-07-06 12:44:10 [INFO] 1 change detected
+2026-07-06 12:44:11 [INFO] 1 change detected
+2026-07-06 12:44:11 [INFO] 1 change detected
+2026-07-06 12:44:11 [INFO] 1 change detected
+2026-07-06 12:44:12 [INFO] 1 change detected
+2026-07-06 12:44:12 [INFO] 1 change detected
+2026-07-06 12:44:12 [INFO] 1 change detected
+2026-07-06 12:44:13 [INFO] 1 change detected
+2026-07-06 12:44:13 [INFO] 1 change detected
+2026-07-06 12:44:14 [INFO] 1 change detected
+2026-07-06 12:44:14 [INFO] 1 change detected
+2026-07-06 12:44:14 [INFO] 1 change detected
+2026-07-06 12:44:15 [INFO] 1 change detected
+2026-07-06 12:44:15 [INFO] 1 change detected
+2026-07-06 12:44:15 [INFO] 1 change detected
+2026-07-06 12:44:16 [INFO] 1 change detected
+2026-07-06 12:44:16 [INFO] 1 change detected
+2026-07-06 12:44:16 [INFO] 1 change detected
+2026-07-06 12:44:17 [INFO] 1 change detected
+2026-07-06 12:44:17 [INFO] 1 change detected
+2026-07-06 12:44:18 [INFO] 1 change detected
+2026-07-06 12:44:18 [INFO] 1 change detected
+2026-07-06 12:44:18 [INFO] 1 change detected
+2026-07-06 12:44:19 [INFO] 1 change detected
+2026-07-06 12:44:19 [INFO] 1 change detected
+2026-07-06 12:44:19 [INFO] 1 change detected
+2026-07-06 12:44:20 [INFO] 1 change detected
+2026-07-06 12:44:20 [INFO] 1 change detected
+2026-07-06 12:44:20 [INFO] 1 change detected
+2026-07-06 12:44:21 [INFO] 1 change detected
+2026-07-06 12:44:21 [INFO] 1 change detected
+2026-07-06 12:44:21 [INFO] 1 change detected
+2026-07-06 12:44:22 [INFO] 1 change detected
+2026-07-06 12:44:22 [INFO] 1 change detected
+2026-07-06 12:44:23 [INFO] 1 change detected
+2026-07-06 12:44:23 [INFO] 1 change detected
+2026-07-06 12:44:23 [INFO] 1 change detected
+2026-07-06 12:44:24 [INFO] 1 change detected
+2026-07-06 12:44:24 [INFO] 1 change detected
+2026-07-06 12:44:24 [INFO] 1 change detected
+2026-07-06 12:44:25 [INFO] 1 change detected
+2026-07-06 12:44:25 [INFO] 1 change detected
+2026-07-06 12:44:25 [INFO] 1 change detected
+2026-07-06 12:44:26 [INFO] 1 change detected
+2026-07-06 12:44:26 [INFO] 1 change detected
+2026-07-06 12:44:27 [INFO] 1 change detected
+2026-07-06 12:44:27 [INFO] 1 change detected
+2026-07-06 12:44:27 [INFO] 1 change detected
+2026-07-06 12:44:28 [INFO] 1 change detected
+2026-07-06 12:44:28 [INFO] 1 change detected
+2026-07-06 12:44:28 [INFO] 1 change detected
+2026-07-06 12:44:29 [INFO] 1 change detected
+2026-07-06 12:44:29 [INFO] 1 change detected
+2026-07-06 12:44:29 [INFO] 1 change detected
+2026-07-06 12:44:30 [INFO] 1 change detected
+2026-07-06 12:44:30 [INFO] 1 change detected
+2026-07-06 12:44:31 [INFO] 1 change detected
+2026-07-06 12:44:31 [INFO] 1 change detected
+2026-07-06 12:44:31 [INFO] 1 change detected
+2026-07-06 12:44:32 [INFO] 1 change detected
+2026-07-06 12:44:32 [INFO] 1 change detected
+2026-07-06 12:44:32 [INFO] 1 change detected
+2026-07-06 12:44:33 [INFO] 1 change detected
+2026-07-06 12:44:33 [INFO] 1 change detected
+2026-07-06 12:44:33 [INFO] 1 change detected
+2026-07-06 12:44:34 [INFO] 1 change detected
+2026-07-06 12:44:34 [INFO] 1 change detected
+2026-07-06 12:44:34 [INFO] 1 change detected
+2026-07-06 12:44:35 [INFO] 1 change detected
+2026-07-06 12:44:35 [INFO] 1 change detected
+2026-07-06 12:44:36 [INFO] 1 change detected
+2026-07-06 12:44:36 [INFO] 1 change detected
+2026-07-06 12:44:36 [INFO] 1 change detected
+2026-07-06 12:44:37 [INFO] 1 change detected
+2026-07-06 12:44:37 [INFO] 1 change detected
+2026-07-06 12:44:37 [INFO] 1 change detected
+2026-07-06 12:44:38 [INFO] 1 change detected
+2026-07-06 12:44:38 [INFO] 1 change detected
+2026-07-06 12:44:39 [INFO] 1 change detected
+2026-07-06 12:44:39 [INFO] 1 change detected
+2026-07-06 12:44:39 [INFO] 1 change detected
+2026-07-06 12:44:40 [INFO] 1 change detected
+2026-07-06 12:44:40 [INFO] 1 change detected
+2026-07-06 12:44:40 [INFO] 1 change detected
+2026-07-06 12:44:41 [INFO] 1 change detected
+2026-07-06 12:44:41 [INFO] 1 change detected
+2026-07-06 12:44:41 [INFO] 1 change detected
+2026-07-06 12:44:42 [INFO] 1 change detected
+2026-07-06 12:44:42 [INFO] 1 change detected
+2026-07-06 12:44:42 [INFO] 1 change detected
+2026-07-06 12:44:43 [INFO] 1 change detected
+2026-07-06 12:44:43 [INFO] 1 change detected
+2026-07-06 12:44:44 [INFO] 1 change detected
+2026-07-06 12:44:44 [INFO] 1 change detected
+2026-07-06 12:44:44 [INFO] 1 change detected
+2026-07-06 12:44:45 [INFO] 1 change detected
+2026-07-06 12:44:45 [INFO] 1 change detected
+2026-07-06 12:44:45 [INFO] 1 change detected
+2026-07-06 12:44:46 [INFO] 1 change detected
+2026-07-06 12:44:46 [INFO] 1 change detected
+2026-07-06 12:44:46 [INFO] 1 change detected
+2026-07-06 12:44:47 [INFO] 1 change detected
+2026-07-06 12:44:47 [INFO] 1 change detected
+2026-07-06 12:44:48 [INFO] 1 change detected
+2026-07-06 12:44:48 [INFO] 1 change detected
+2026-07-06 12:44:48 [INFO] 1 change detected
+2026-07-06 12:44:49 [INFO] 1 change detected
+2026-07-06 12:44:49 [INFO] 1 change detected
+2026-07-06 12:44:49 [INFO] 1 change detected
+2026-07-06 12:44:50 [INFO] 1 change detected
+2026-07-06 12:44:50 [INFO] 1 change detected
+2026-07-06 12:44:50 [INFO] 1 change detected
+2026-07-06 12:44:51 [INFO] 1 change detected
+2026-07-06 12:44:51 [INFO] 1 change detected
+2026-07-06 12:44:52 [INFO] 1 change detected
+2026-07-06 12:44:52 [INFO] 1 change detected
+2026-07-06 12:44:52 [INFO] 1 change detected
+2026-07-06 12:44:53 [INFO] 1 change detected
+2026-07-06 12:44:53 [INFO] 1 change detected
+2026-07-06 12:44:53 [INFO] 1 change detected
+2026-07-06 12:44:54 [INFO] 1 change detected
+2026-07-06 12:44:54 [INFO] 1 change detected
+2026-07-06 12:44:54 [INFO] 1 change detected
+2026-07-06 12:44:55 [INFO] 1 change detected
+2026-07-06 12:44:55 [INFO] 1 change detected
+2026-07-06 12:44:55 [INFO] 1 change detected
+2026-07-06 12:44:56 [INFO] 1 change detected
+2026-07-06 12:44:56 [INFO] 1 change detected
+2026-07-06 12:44:57 [INFO] 1 change detected
+2026-07-06 12:44:57 [INFO] 1 change detected
+2026-07-06 12:44:57 [INFO] 1 change detected
+2026-07-06 12:44:58 [INFO] 1 change detected
+2026-07-06 12:44:58 [INFO] 1 change detected
+2026-07-06 12:44:58 [INFO] 1 change detected
+2026-07-06 12:44:59 [INFO] 1 change detected
+2026-07-06 12:44:59 [INFO] 1 change detected
+2026-07-06 12:44:59 [INFO] 1 change detected
+2026-07-06 12:45:00 [INFO] 1 change detected
+2026-07-06 12:45:00 [INFO] 1 change detected
+2026-07-06 12:45:01 [INFO] 1 change detected
+2026-07-06 12:45:01 [INFO] 1 change detected
+2026-07-06 12:45:01 [INFO] 1 change detected
+2026-07-06 12:45:02 [INFO] 1 change detected
+2026-07-06 12:45:02 [INFO] 1 change detected
+2026-07-06 12:45:02 [INFO] 1 change detected
+2026-07-06 12:45:03 [INFO] 1 change detected
+2026-07-06 12:45:03 [INFO] 1 change detected
+2026-07-06 12:45:03 [INFO] 1 change detected
+2026-07-06 12:45:04 [INFO] 1 change detected
+2026-07-06 12:45:04 [INFO] 1 change detected
+2026-07-06 12:45:05 [INFO] 1 change detected
+2026-07-06 12:45:05 [INFO] 1 change detected
+2026-07-06 12:45:05 [INFO] 1 change detected
+2026-07-06 12:45:06 [INFO] 1 change detected
+2026-07-06 12:45:06 [INFO] 1 change detected
+2026-07-06 12:45:06 [INFO] 1 change detected
+2026-07-06 12:45:07 [INFO] 1 change detected
+2026-07-06 12:45:07 [INFO] 1 change detected
+2026-07-06 12:45:07 [INFO] 1 change detected
+2026-07-06 12:45:08 [INFO] 1 change detected
+2026-07-06 12:45:08 [INFO] 1 change detected
+2026-07-06 12:45:09 [INFO] 1 change detected
+2026-07-06 12:45:09 [INFO] 1 change detected
+2026-07-06 12:45:09 [INFO] 1 change detected
+2026-07-06 12:45:10 [INFO] 1 change detected
+2026-07-06 12:45:10 [INFO] 1 change detected
+2026-07-06 12:45:10 [INFO] 1 change detected
+2026-07-06 12:45:11 [INFO] 1 change detected
+2026-07-06 12:45:11 [INFO] 1 change detected
+2026-07-06 12:45:11 [INFO] 1 change detected
+2026-07-06 12:45:12 [INFO] 1 change detected
+2026-07-06 12:45:12 [INFO] 1 change detected
+2026-07-06 12:45:13 [INFO] 1 change detected
+2026-07-06 12:45:13 [INFO] 1 change detected
+2026-07-06 12:45:13 [INFO] 1 change detected
+2026-07-06 12:45:14 [INFO] 1 change detected
+2026-07-06 12:45:14 [INFO] 1 change detected
+2026-07-06 12:45:14 [INFO] 1 change detected
+2026-07-06 12:45:15 [INFO] 1 change detected
+2026-07-06 12:45:15 [INFO] 1 change detected
+2026-07-06 12:45:16 [INFO] 1 change detected
+2026-07-06 12:45:16 [INFO] 1 change detected
+2026-07-06 12:45:16 [INFO] 1 change detected
+2026-07-06 12:45:17 [INFO] 1 change detected
+2026-07-06 12:45:17 [INFO] 1 change detected
+2026-07-06 12:45:17 [INFO] 1 change detected
+2026-07-06 12:45:18 [INFO] 1 change detected
+2026-07-06 12:45:18 [INFO] 1 change detected
+2026-07-06 12:45:18 [INFO] 1 change detected
+2026-07-06 12:45:19 [INFO] 1 change detected
+2026-07-06 12:45:19 [INFO] 1 change detected
+2026-07-06 12:45:19 [INFO] 1 change detected
+2026-07-06 12:45:20 [INFO] 1 change detected
+2026-07-06 12:45:20 [INFO] 1 change detected
+2026-07-06 12:45:21 [INFO] 1 change detected
+2026-07-06 12:45:21 [INFO] 1 change detected
+2026-07-06 12:45:21 [INFO] 1 change detected
+2026-07-06 12:45:22 [INFO] 1 change detected
+2026-07-06 12:45:22 [INFO] 1 change detected
+2026-07-06 12:45:22 [INFO] 1 change detected
+2026-07-06 12:45:23 [INFO] 1 change detected
+2026-07-06 12:45:23 [INFO] 1 change detected
+2026-07-06 12:45:23 [INFO] 1 change detected
+2026-07-06 12:45:24 [INFO] 1 change detected
+2026-07-06 12:45:24 [INFO] 1 change detected
+2026-07-06 12:45:24 [INFO] 1 change detected
+2026-07-06 12:45:25 [INFO] 1 change detected
+2026-07-06 12:45:25 [INFO] 1 change detected
+2026-07-06 12:45:26 [INFO] 1 change detected
+2026-07-06 12:45:26 [INFO] 1 change detected
+2026-07-06 12:45:26 [INFO] 1 change detected
+2026-07-06 12:45:27 [INFO] 1 change detected
+2026-07-06 12:45:27 [INFO] 1 change detected
+2026-07-06 12:45:27 [INFO] 1 change detected
+2026-07-06 12:45:28 [INFO] 1 change detected
+2026-07-06 12:45:28 [INFO] 1 change detected
+2026-07-06 12:45:28 [INFO] 1 change detected
+2026-07-06 12:45:29 [INFO] 1 change detected
+2026-07-06 12:45:29 [INFO] 1 change detected
+2026-07-06 12:45:30 [INFO] 1 change detected
+2026-07-06 12:45:30 [INFO] 1 change detected
+2026-07-06 12:45:30 [INFO] 1 change detected
+2026-07-06 12:45:31 [INFO] 1 change detected
+2026-07-06 12:45:31 [INFO] 1 change detected
+2026-07-06 12:45:31 [INFO] 1 change detected
+2026-07-06 12:45:32 [INFO] 1 change detected
+2026-07-06 12:45:32 [INFO] 1 change detected
+2026-07-06 12:45:33 [INFO] 1 change detected
+2026-07-06 12:45:33 [INFO] 1 change detected
+2026-07-06 12:45:33 [INFO] 1 change detected
+2026-07-06 12:45:34 [INFO] 1 change detected
+2026-07-06 12:45:34 [INFO] 1 change detected
+2026-07-06 12:45:34 [INFO] 1 change detected
+2026-07-06 12:45:35 [INFO] 1 change detected
+2026-07-06 12:45:35 [INFO] 1 change detected
+2026-07-06 12:45:35 [INFO] 1 change detected
+2026-07-06 12:45:36 [INFO] 1 change detected
+2026-07-06 12:45:36 [INFO] 1 change detected
+2026-07-06 12:45:36 [INFO] 1 change detected
+2026-07-06 12:45:37 [INFO] 1 change detected
+2026-07-06 12:45:37 [INFO] 1 change detected
+2026-07-06 12:45:37 [INFO] 1 change detected
+2026-07-06 12:45:38 [INFO] 1 change detected
+2026-07-06 12:45:38 [INFO] 1 change detected
+2026-07-06 12:45:39 [INFO] 1 change detected
+2026-07-06 12:45:39 [INFO] 1 change detected
+2026-07-06 12:45:39 [INFO] 1 change detected
+2026-07-06 12:45:40 [INFO] 1 change detected
+2026-07-06 12:45:40 [INFO] 1 change detected
+2026-07-06 12:45:40 [INFO] 1 change detected
+2026-07-06 12:45:41 [INFO] 1 change detected
+2026-07-06 12:45:41 [INFO] 1 change detected
+2026-07-06 12:45:42 [INFO] 1 change detected
+2026-07-06 12:45:42 [INFO] 1 change detected
+2026-07-06 12:45:42 [INFO] 1 change detected
+2026-07-06 12:45:43 [INFO] 1 change detected
+2026-07-06 12:45:43 [INFO] 1 change detected
+2026-07-06 12:45:43 [INFO] 1 change detected
+2026-07-06 12:45:44 [INFO] 1 change detected
+2026-07-06 12:45:44 [INFO] 1 change detected
+2026-07-06 12:45:44 [INFO] 1 change detected
+2026-07-06 12:45:45 [INFO] 1 change detected
+2026-07-06 12:45:45 [INFO] 1 change detected
+2026-07-06 12:45:46 [INFO] 1 change detected
+2026-07-06 12:45:46 [INFO] 1 change detected
+2026-07-06 12:45:46 [INFO] 1 change detected
+2026-07-06 12:45:47 [INFO] 1 change detected
+2026-07-06 12:45:47 [INFO] 1 change detected
+2026-07-06 12:45:47 [INFO] 1 change detected
+2026-07-06 12:45:48 [INFO] 1 change detected
+2026-07-06 12:45:48 [INFO] 1 change detected
+2026-07-06 12:45:48 [INFO] 1 change detected
+2026-07-06 12:45:49 [INFO] 1 change detected
+2026-07-06 12:45:49 [INFO] 1 change detected
+2026-07-06 12:45:50 [INFO] 1 change detected
+2026-07-06 12:45:50 [INFO] 1 change detected
+2026-07-06 12:45:50 [INFO] 1 change detected
+2026-07-06 12:45:51 [INFO] 1 change detected
+2026-07-06 12:45:51 [INFO] 1 change detected
+2026-07-06 12:45:51 [INFO] 1 change detected
+2026-07-06 12:45:52 [INFO] 1 change detected
+2026-07-06 12:45:52 [INFO] 1 change detected
+2026-07-06 12:45:52 [INFO] 1 change detected
+2026-07-06 12:45:53 [INFO] 1 change detected
+2026-07-06 12:45:53 [INFO] 1 change detected
+2026-07-06 12:45:53 [INFO] 1 change detected
+2026-07-06 12:45:54 [INFO] 1 change detected
+2026-07-06 12:45:54 [INFO] 1 change detected
+2026-07-06 12:45:55 [INFO] 1 change detected
+2026-07-06 12:45:55 [INFO] 1 change detected
+2026-07-06 12:45:55 [INFO] 1 change detected
+2026-07-06 12:45:56 [INFO] 1 change detected
+2026-07-06 12:45:56 [INFO] 1 change detected
+2026-07-06 12:45:56 [INFO] 1 change detected
+2026-07-06 12:45:57 [INFO] 1 change detected
+2026-07-06 12:45:57 [INFO] 1 change detected
+2026-07-06 12:45:57 [INFO] 1 change detected
+2026-07-06 12:45:58 [INFO] 1 change detected
+2026-07-06 12:45:58 [INFO] 1 change detected
+2026-07-06 12:45:59 [INFO] 1 change detected
+2026-07-06 12:45:59 [INFO] 1 change detected
+2026-07-06 12:45:59 [INFO] 1 change detected
+2026-07-06 12:46:00 [INFO] 1 change detected
+2026-07-06 12:46:00 [INFO] 1 change detected
+2026-07-06 12:46:00 [INFO] 1 change detected
+2026-07-06 12:46:01 [INFO] 1 change detected
+2026-07-06 12:46:01 [INFO] 1 change detected
+2026-07-06 12:46:01 [INFO] 1 change detected
+2026-07-06 12:46:02 [INFO] 1 change detected
+2026-07-06 12:46:02 [INFO] 1 change detected
+2026-07-06 12:46:02 [INFO] 1 change detected
+2026-07-06 12:46:03 [INFO] 1 change detected
+2026-07-06 12:46:03 [INFO] 1 change detected
+2026-07-06 12:46:04 [INFO] 1 change detected
+2026-07-06 12:46:04 [INFO] 1 change detected
+2026-07-06 12:46:04 [INFO] 1 change detected
+2026-07-06 12:46:05 [INFO] 1 change detected
+2026-07-06 12:46:05 [INFO] 1 change detected
+2026-07-06 12:46:05 [INFO] 1 change detected
+2026-07-06 12:46:06 [INFO] 1 change detected
+2026-07-06 12:46:06 [INFO] 1 change detected
+2026-07-06 12:46:06 [INFO] 1 change detected
+2026-07-06 12:46:07 [INFO] 1 change detected
+2026-07-06 12:46:07 [INFO] 1 change detected
+2026-07-06 12:46:07 [INFO] 1 change detected
+2026-07-06 12:46:08 [INFO] 1 change detected
+2026-07-06 12:46:08 [INFO] 1 change detected
+2026-07-06 12:46:09 [INFO] 1 change detected
+2026-07-06 12:46:09 [INFO] 1 change detected
+2026-07-06 12:46:09 [INFO] 1 change detected
+2026-07-06 12:46:10 [INFO] 1 change detected
+2026-07-06 12:46:10 [INFO] 1 change detected
+2026-07-06 12:46:10 [INFO] 1 change detected
+2026-07-06 12:46:11 [INFO] 1 change detected
+2026-07-06 12:46:11 [INFO] 1 change detected
+2026-07-06 12:46:11 [INFO] 1 change detected
+2026-07-06 12:46:12 [INFO] 1 change detected
+2026-07-06 12:46:12 [INFO] 1 change detected
+2026-07-06 12:46:13 [INFO] 1 change detected
+2026-07-06 12:46:13 [INFO] 1 change detected
+2026-07-06 12:46:13 [INFO] 1 change detected
+2026-07-06 12:46:14 [INFO] 1 change detected
+2026-07-06 12:46:14 [INFO] 1 change detected
+2026-07-06 12:46:14 [INFO] 1 change detected
+2026-07-06 12:46:15 [INFO] 1 change detected
+2026-07-06 12:46:15 [INFO] 1 change detected
+2026-07-06 12:46:15 [INFO] 1 change detected
+2026-07-06 12:46:16 [INFO] 1 change detected
+2026-07-06 12:46:16 [INFO] 1 change detected
+2026-07-06 12:46:16 [INFO] 1 change detected
+2026-07-06 12:46:17 [INFO] 1 change detected
+2026-07-06 12:46:17 [INFO] 1 change detected
+2026-07-06 12:46:18 [INFO] 1 change detected
+2026-07-06 12:46:18 [INFO] 1 change detected
+2026-07-06 12:46:18 [INFO] 1 change detected
+2026-07-06 12:46:19 [INFO] 1 change detected
+2026-07-06 12:46:19 [INFO] 1 change detected
+2026-07-06 12:46:19 [INFO] 1 change detected
+2026-07-06 12:46:20 [INFO] 1 change detected
+2026-07-06 12:46:20 [INFO] 1 change detected
+2026-07-06 12:46:20 [INFO] 1 change detected
+2026-07-06 12:46:21 [INFO] 1 change detected
+2026-07-06 12:46:21 [INFO] 1 change detected
+2026-07-06 12:46:21 [INFO] 1 change detected
+2026-07-06 12:46:22 [INFO] 1 change detected
+2026-07-06 12:46:22 [INFO] 1 change detected
+2026-07-06 12:46:23 [INFO] 1 change detected
+2026-07-06 12:46:23 [INFO] 1 change detected
+2026-07-06 12:46:23 [INFO] 1 change detected
+2026-07-06 12:46:24 [INFO] 1 change detected
+2026-07-06 12:46:24 [INFO] 1 change detected
+2026-07-06 12:46:24 [INFO] 1 change detected
+2026-07-06 12:46:25 [INFO] 1 change detected
+2026-07-06 12:46:25 [INFO] 1 change detected
+2026-07-06 12:46:25 [INFO] 1 change detected
+2026-07-06 12:46:26 [INFO] 1 change detected
+2026-07-06 12:46:26 [INFO] 1 change detected
+2026-07-06 12:46:26 [INFO] 1 change detected
+2026-07-06 12:46:27 [INFO] 1 change detected
+2026-07-06 12:46:27 [INFO] 1 change detected
+2026-07-06 12:46:28 [INFO] 1 change detected
+2026-07-06 12:46:28 [INFO] 1 change detected
+2026-07-06 12:46:28 [INFO] 1 change detected
+2026-07-06 12:46:29 [INFO] 1 change detected
+2026-07-06 12:46:29 [INFO] 1 change detected
+2026-07-06 12:46:29 [INFO] 1 change detected
+2026-07-06 12:46:30 [INFO] 1 change detected
+2026-07-06 12:46:30 [INFO] 1 change detected
+2026-07-06 12:46:30 [INFO] 1 change detected
+2026-07-06 12:46:31 [INFO] 1 change detected
+2026-07-06 12:46:31 [INFO] 1 change detected
+2026-07-06 12:46:32 [INFO] 1 change detected
+2026-07-06 12:46:32 [INFO] 1 change detected
+2026-07-06 12:46:32 [INFO] 1 change detected
+2026-07-06 12:46:33 [INFO] 1 change detected
+2026-07-06 12:46:33 [INFO] 1 change detected
+2026-07-06 12:46:33 [INFO] 1 change detected
+2026-07-06 12:46:34 [INFO] 1 change detected
+2026-07-06 12:46:34 [INFO] 1 change detected
+2026-07-06 12:46:34 [INFO] 1 change detected
+2026-07-06 12:46:35 [INFO] 1 change detected
+2026-07-06 12:46:35 [INFO] 1 change detected
+2026-07-06 12:46:36 [INFO] 1 change detected
+2026-07-06 12:46:36 [INFO] 1 change detected
+2026-07-06 12:46:36 [INFO] 1 change detected
+2026-07-06 12:46:37 [INFO] 1 change detected
+2026-07-06 12:46:37 [INFO] 1 change detected
+2026-07-06 12:46:37 [INFO] 1 change detected
+2026-07-06 12:46:38 [INFO] 1 change detected
+2026-07-06 12:46:38 [INFO] 1 change detected
+2026-07-06 12:46:38 [INFO] 1 change detected
+2026-07-06 12:46:39 [INFO] 1 change detected
+2026-07-06 12:46:39 [INFO] 1 change detected
+2026-07-06 12:46:39 [INFO] 1 change detected
+2026-07-06 12:46:40 [INFO] 1 change detected
+2026-07-06 12:46:40 [INFO] 1 change detected
+2026-07-06 12:46:41 [INFO] 1 change detected
+2026-07-06 12:46:41 [INFO] 1 change detected
+2026-07-06 12:46:41 [INFO] 1 change detected
+2026-07-06 12:46:42 [INFO] 1 change detected
+2026-07-06 12:46:42 [INFO] 1 change detected
+2026-07-06 12:46:42 [INFO] 1 change detected
+2026-07-06 12:46:43 [INFO] 1 change detected
+2026-07-06 12:46:43 [INFO] 1 change detected
+2026-07-06 12:46:43 [INFO] 1 change detected
+2026-07-06 12:46:44 [INFO] 1 change detected
+2026-07-06 12:46:44 [INFO] 1 change detected
+2026-07-06 12:46:44 [INFO] 1 change detected
+2026-07-06 12:46:45 [INFO] 1 change detected
+2026-07-06 12:46:45 [INFO] 1 change detected
+2026-07-06 12:46:46 [INFO] 1 change detected
+2026-07-06 12:46:46 [INFO] 1 change detected
+2026-07-06 12:46:46 [INFO] 1 change detected
+2026-07-06 12:46:47 [INFO] 1 change detected
+2026-07-06 12:46:47 [INFO] 1 change detected
+2026-07-06 12:46:47 [INFO] 1 change detected
+2026-07-06 12:46:48 [INFO] 1 change detected
+2026-07-06 12:46:48 [INFO] 1 change detected
+2026-07-06 12:46:49 [INFO] 1 change detected
+2026-07-06 12:46:49 [INFO] 1 change detected
+2026-07-06 12:46:49 [INFO] 1 change detected
+2026-07-06 12:46:50 [INFO] 1 change detected
+2026-07-06 12:46:50 [INFO] 1 change detected
+2026-07-06 12:46:50 [INFO] 1 change detected
+2026-07-06 12:46:51 [INFO] 1 change detected
+2026-07-06 12:46:51 [INFO] 1 change detected
+2026-07-06 12:46:51 [INFO] 1 change detected
+2026-07-06 12:46:52 [INFO] 1 change detected
+2026-07-06 12:46:52 [INFO] 1 change detected
+2026-07-06 12:46:53 [INFO] 1 change detected
+2026-07-06 12:46:53 [INFO] 1 change detected
+2026-07-06 12:46:53 [INFO] 1 change detected
+2026-07-06 12:46:54 [INFO] 1 change detected
+2026-07-06 12:46:54 [INFO] 1 change detected
+2026-07-06 12:46:54 [INFO] 1 change detected
+2026-07-06 12:46:55 [INFO] 1 change detected
+2026-07-06 12:46:55 [INFO] 1 change detected
+2026-07-06 12:46:55 [INFO] 1 change detected
+2026-07-06 12:46:56 [INFO] 1 change detected
+2026-07-06 12:46:56 [INFO] 1 change detected
+2026-07-06 12:46:56 [INFO] 1 change detected
+2026-07-06 12:46:57 [INFO] 1 change detected
+2026-07-06 12:46:57 [INFO] 1 change detected
+2026-07-06 12:46:58 [INFO] 1 change detected
+2026-07-06 12:46:58 [INFO] 1 change detected
+2026-07-06 12:46:58 [INFO] 1 change detected
+2026-07-06 12:46:59 [INFO] 1 change detected
+2026-07-06 12:46:59 [INFO] 1 change detected
+2026-07-06 12:47:00 [INFO] 1 change detected
+2026-07-06 12:47:00 [INFO] 1 change detected
+2026-07-06 12:47:00 [INFO] 1 change detected
+2026-07-06 12:47:01 [INFO] 1 change detected
+2026-07-06 12:47:01 [INFO] 1 change detected
+2026-07-06 12:47:01 [INFO] 1 change detected
+2026-07-06 12:48:34 [INFO] 1 change detected
+2026-07-06 12:48:35 [INFO] 1 change detected
+2026-07-06 12:48:35 [INFO] 1 change detected
+2026-07-06 12:48:36 [INFO] 1 change detected
+2026-07-06 12:48:36 [INFO] 1 change detected
+2026-07-06 12:48:37 [INFO] 1 change detected
+2026-07-06 12:48:37 [INFO] 1 change detected
+2026-07-06 12:48:38 [INFO] 1 change detected
+2026-07-06 12:48:39 [INFO] 1 change detected
+2026-07-06 12:48:40 [INFO] 1 change detected
+2026-07-06 12:48:40 [INFO] 1 change detected
+2026-07-06 12:48:41 [INFO] 1 change detected
+2026-07-06 12:48:44 [INFO] 1 change detected
+2026-07-06 12:48:45 [INFO] 1 change detected
+2026-07-06 12:48:45 [INFO] 1 change detected
+2026-07-06 12:48:46 [INFO] 1 change detected
+2026-07-06 12:48:46 [INFO] 1 change detected
+2026-07-06 12:48:48 [INFO] 1 change detected
+2026-07-06 12:48:48 [INFO] 1 change detected
+2026-07-06 12:48:48 [INFO] 1 change detected
+2026-07-06 12:48:49 [INFO] 1 change detected
+2026-07-06 12:48:49 [INFO] 1 change detected
+2026-07-06 12:48:49 [INFO] 1 change detected
+2026-07-06 12:48:50 [INFO] 1 change detected
+2026-07-06 12:48:50 [INFO] 1 change detected
+2026-07-06 12:48:51 [INFO] 1 change detected
+2026-07-06 12:48:51 [INFO] 1 change detected
+2026-07-06 12:48:51 [INFO] 1 change detected
+2026-07-06 12:48:52 [INFO] 1 change detected
+2026-07-06 12:48:52 [INFO] 1 change detected
+2026-07-06 12:48:52 [INFO] 1 change detected
+2026-07-06 12:48:53 [INFO] 1 change detected
+2026-07-06 12:48:53 [INFO] 1 change detected
+2026-07-06 12:48:53 [INFO] 1 change detected
+2026-07-06 12:48:54 [INFO] 1 change detected
+2026-07-06 12:48:54 [INFO] 1 change detected
+2026-07-06 12:48:54 [INFO] 1 change detected
+2026-07-06 12:48:55 [INFO] 1 change detected
+2026-07-06 12:48:55 [INFO] 1 change detected
+2026-07-06 12:48:56 [INFO] 1 change detected
+2026-07-06 12:48:56 [INFO] 1 change detected
+2026-07-06 12:48:56 [INFO] 1 change detected
+2026-07-06 12:48:57 [INFO] 1 change detected
+2026-07-06 12:48:57 [INFO] 1 change detected
+2026-07-06 12:48:57 [INFO] 1 change detected
+2026-07-06 12:48:59 [INFO] 1 change detected
+2026-07-06 12:48:59 [INFO] 1 change detected
+2026-07-06 12:48:59 [INFO] 1 change detected
+2026-07-06 12:49:01 [INFO] 1 change detected
+2026-07-06 12:49:02 [INFO] 1 change detected
+2026-07-06 12:49:02 [INFO] 1 change detected
+2026-07-06 12:49:02 [INFO] 1 change detected
+2026-07-06 12:49:04 [INFO] 1 change detected

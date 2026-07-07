@@ -1,0 +1,23 @@
+{
+  "name": "ar-vlm-guide",
+  "version": "0.1.0",
+  "private": true,
+  "main": "App.tsx",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
+  },
+  "dependencies": {
+    "expo": "~52.0.0",
+    "expo-file-system": "~18.0.0",
+    "react": "18.3.1",
+    "react-native": "0.76.0",
+    "@reactvision/react-viro": "^2.56.0",
+    "@react-native-voice/voice": "^3.2.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/react": "~18.3.0"
+  }
+}

@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+groq
+mistralai
+python-dotenv
+pillow
+python-multipart
+websockets
