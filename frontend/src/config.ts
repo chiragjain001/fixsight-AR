@@ -50,7 +50,7 @@ const getDevHost = (): string => {
 const devHost = getDevHost();
 
 // Dynamic resolution: prefer dynamic Metro host if found, then env variable, then default fallback.
-export const BACKEND_HOST = devHost || process.env.EXPO_PUBLIC_BACKEND_IP || '10.86.242.176';
+export const BACKEND_HOST = devHost || process.env.EXPO_PUBLIC_BACKEND_IP || '192.168.0.15';
 export const BACKEND_PORT = process.env.EXPO_PUBLIC_BACKEND_PORT || '8000';
 
 export const BACKEND_URL = `http://${BACKEND_HOST}:${BACKEND_PORT}`;
