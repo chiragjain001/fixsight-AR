@@ -182,6 +182,8 @@ export interface WorkflowStore {
   // Camera — cameraRef kept for legacy compat, captureFrame is the AR path
   cameraRef: any | null;
   captureFrame: (() => Promise<{ base64: string }>) | null;
+  // AR Grounding — set by CameraView after mount
+  groundLastImage: ((imageB64: string, query: string) => Promise<void>) | null;
   facing: FacingMode;
   torchEnabled: boolean;
   isLandscape: boolean;
@@ -192,6 +194,7 @@ export interface WorkflowStore {
   // Actions
   setCameraRef: (ref: any | null) => void;
   setCaptureFrame: (fn: () => Promise<{ base64: string }>) => void;
+  setGroundLastImage: (fn: (imageB64: string, query: string) => Promise<void>) => void;
   triggerManualScan: () => void;
   startScanningSim: () => void;
   runRealScan: () => Promise<void>;
@@ -302,6 +305,7 @@ export const useWorkflowStore = create<WorkflowStore>((set, get) => ({
   generalSolutions: [],
   cameraRef: null,
   captureFrame: null,
+  groundLastImage: null,
   facing: 'back',
   torchEnabled: false,
   isLandscape: false,
@@ -309,6 +313,7 @@ export const useWorkflowStore = create<WorkflowStore>((set, get) => ({
 
   setCameraRef: (cameraRef) => set({ cameraRef }),
   setCaptureFrame: (fn) => set({ captureFrame: fn }),
+  setGroundLastImage: (fn) => set({ groundLastImage: fn }),
   triggerManualScan: () => set((state) => ({ manualScanTick: state.manualScanTick + 1 })),
 
   startScanningSim: () => {
@@ -429,6 +434,15 @@ export const useWorkflowStore = create<WorkflowStore>((set, get) => ({
             sceneId: newSceneId,
             sceneSummary: newSceneSummary,
           });
+
+          // ── 3D AR Grounding ───────────────────────────────────────────────
+          // Fire-and-forget: call /ground-label and place 3D anchors.
+          // Runs after state update so UI shows IDENTIFIED immediately.
+          const { groundLastImage } = get();
+          if (groundLastImage && b64) {
+            groundLastImage(b64, `Identify and label all visible parts of the ${detectedDevice}`)
+              .catch((e) => console.warn('[Scan] AR grounding failed (non-fatal):', e));
+          }
           
         } catch (apiError) {
           console.error('[Scan] API failed:', apiError);
@@ -463,6 +477,19 @@ export const useWorkflowStore = create<WorkflowStore>((set, get) => ({
 
   selectMode: async (activeMode) => {
     Speech.stop();
+    const { lastCapturedImageB64, deviceName, groundLastImage } = get();
+
+    // Trigger mode-specific AR re-grounding so labels match the chosen mode
+    if (groundLastImage && lastCapturedImageB64) {
+      const modeQuery =
+        activeMode === 'troubleshoot' ? `Highlight components related to faults or issues on the ${deviceName}` :
+        activeMode === 'guide'        ? `Label each step-relevant component for maintenance of the ${deviceName}` :
+        activeMode === 'explain'      ? `Label all main visible components of the ${deviceName}` :
+        `Label components of the ${deviceName}`;
+      groundLastImage(lastCapturedImageB64, modeQuery)
+        .catch((e) => console.warn('[selectMode] AR re-grounding failed (non-fatal):', e));
+    }
+
     if (activeMode === 'explain') {
       set({ activeMode, workflowState: 'EXPLORE_LABELS', activeComponentIndex: 0 });
     } else if (activeMode === 'guide') {
