@@ -1,21 +1,20 @@
 /**
  * CameraView.tsx
  *
- * PRIMARY camera component.
+ * Camera component with automatic fallback:
+ *  - New EAS build → ARNativeView (ARCore, 3D world tracking, captureFrame via ARBridge)
+ *  - Old APK        → VisionCamera fallback (auto-switched by ARViewErrorBoundary),
+ *                     captureFrame via takePhoto() + expo-file-system
  *
- * Architecture:
- *  - ARNativeView  → ARCore owns the camera, renders the live feed, does SLAM tracking
- *  - useARSession  → lifecycle management, 60fps projection loop
- *  - useARGrounding→ converts VLM 2D coordinates to 3D world anchors via hitTest()
- *  - AROverlayLayer→ renders Skia rings + RN labels on top of the AR feed
- *
- * When ARCore is not supported (rare / unsupported device), falls back gracefully
- * to a plain message rather than crashing.
+ * Either way the camera works, the app doesn't crash, and the rest of the
+ * workflow (scan, labels, voice) continues normally.
  */
 
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { ARNativeView } from '../ar/ARNativeView';
+import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera';
+import * as FileSystem from 'expo-file-system';
+import { ARNativeViewWithRef } from '../ar/ARNativeView';
 import { AROverlayLayer } from '../ar/AROverlayLayer';
 import { ARTrackingStatus } from '../ar/ARTrackingStatus';
 import { useARSession } from '../../hooks/useARSession';
@@ -23,23 +22,51 @@ import { useARGrounding } from '../../hooks/useARGrounding';
 import { useWorkflowStore } from '../../store/workflowStore';
 import { useARAnchorStore } from '../../store/arAnchorStore';
 import { BACKEND_URL } from '../../src/config';
-import { ARBridge } from '../../modules/ar-session';
 
 export function CameraView() {
-  const { captureFrame } = useARSession();
+  // ── AR session (provides captureFrame via ARBridge when ARCore is active) ──
+  const { captureFrame: arCaptureFrame } = useARSession();
   const { groundLabels, clearAll } = useARGrounding();
-  const setCaptureFrame = useWorkflowStore((s) => s.setCaptureFrame);
-  const trackingState = useARAnchorStore((s) => s.trackingState);
 
-  // Register captureFrame with workflowStore so voice session can call it
+  const setCaptureFrame   = useWorkflowStore((s) => s.setCaptureFrame);
+  const setGroundLastImage = useWorkflowStore((s) => s.setGroundLastImage);
+  const trackingState     = useARAnchorStore((s) => s.trackingState);
+
+  // ── VisionCamera refs (used as fallback when ARNativeView crashes) ─────────
+  const { hasPermission, requestPermission } = useCameraPermission();
+  const device     = useCameraDevice('back');
+  const cameraRef  = useRef<Camera>(null);
+
+  useEffect(() => {
+    if (!hasPermission) requestPermission();
+  }, [hasPermission]);
+
+  // ── captureFrame: try ARBridge first, fall back to VisionCamera takePhoto ──
+  const captureFrame = useCallback(async (): Promise<{ base64: string }> => {
+    // ARBridge path: works when ARCore session is active (new EAS build)
+    if (arCaptureFrame) {
+      try {
+        return await arCaptureFrame();
+      } catch {
+        // ARBridge not ready — fall through to VisionCamera
+      }
+    }
+    // VisionCamera fallback path
+    const cam = cameraRef.current;
+    if (!cam) throw new Error('[CameraView] Camera not ready');
+    const photo = await cam.takePhoto({ flash: 'off' });
+    const base64 = await FileSystem.readAsStringAsync(`file://${photo.path}`, {
+      encoding: FileSystem.EncodingType.Base64,
+    });
+    return { base64 };
+  }, [arCaptureFrame]);
+
+  // Register captureFrame so workflowStore.runRealScan() can call it
   useEffect(() => {
     setCaptureFrame(captureFrame);
   }, [captureFrame, setCaptureFrame]);
 
-  // ── Scan-triggered grounding ───────────────────────────────────────────────
-  // Called by the scan button (via workflowStore) AFTER the VLM identifies
-  // the device. We send the captured image to /ground-label, which returns
-  // Moondream-located coordinates, then we hitTest each and create anchors.
+  // ── groundLastImage: calls /ground-label → hitTest → createAnchor ─────────
   const groundLastImage = useCallback(
     async (imageB64: string, query: string) => {
       try {
@@ -51,30 +78,27 @@ export function CameraView() {
         });
         if (!res.ok) return;
         const { labels } = await res.json();
-        if (labels && labels.length > 0) {
-          await groundLabels(labels);
-        }
+        if (labels?.length > 0) await groundLabels(labels);
       } catch (err) {
-        console.warn('[CameraView] groundLastImage failed:', err);
+        console.warn('[CameraView] groundLastImage failed (non-fatal):', err);
       }
     },
     [groundLabels, clearAll]
   );
 
-  // Expose groundLastImage to workflowStore so runRealScan and selectMode can trigger it
-  const setGroundLastImage = useWorkflowStore((s) => s.setGroundLastImage);
+  // Register groundLastImage so runRealScan and selectMode can trigger it
   useEffect(() => {
     setGroundLastImage(groundLastImage);
   }, [groundLastImage, setGroundLastImage]);
 
-  // Unsupported device — show a clear message
+  // ── Unsupported device ─────────────────────────────────────────────────────
   if (trackingState === 'unsupported') {
     return (
       <View style={styles.errorContainer}>
         <Text style={styles.errorTitle}>AR Not Supported</Text>
         <Text style={styles.errorText}>
           This device does not support ARCore.{'\n'}
-          AR features require ARCore (Android 7.0+) with Google Play Services for AR installed.
+          AR features require ARCore with Google Play Services for AR installed.
         </Text>
       </View>
     );
@@ -82,19 +106,32 @@ export function CameraView() {
 
   return (
     <>
-      {/* ARCore camera feed — owns camera hardware and SLAM tracking */}
-      <ARNativeView style={StyleSheet.absoluteFill} />
+      {/*
+        ARNativeViewWithRef:
+        - On NEW EAS build: renders ARCore native view. cameraRef stays unused.
+        - On OLD APK:       Error Boundary catches crash → renders VisionCamera
+                            and exposes it via cameraRef for captureFrame().
+      */}
+      <ARNativeViewWithRef
+        style={StyleSheet.absoluteFill}
+        fallbackCameraRef={cameraRef}
+        hasPermission={hasPermission}
+        device={device ?? undefined}
+      />
 
-      {/* Skia rings + RN label pills positioned by 3D anchor projections */}
       <AROverlayLayer />
-
-      {/* Tracking quality banner (limited / initializing / normal) */}
       <ARTrackingStatus />
     </>
   );
 }
 
 const styles = StyleSheet.create({
+  hiddenCamera: {
+    width: 1,
+    height: 1,
+    opacity: 0,
+    position: 'absolute',
+  },
   errorContainer: {
     flex: 1,
     backgroundColor: '#0a0c12',
