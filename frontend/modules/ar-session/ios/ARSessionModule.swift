@@ -1,7 +1,6 @@
 // ARSessionModule.swift
-// Expo Module — exposes ARSessionManager's capabilities to React Native JS.
-// React Native calls these async functions. The module never touches UI directly;
-// all AR operations are delegated to ARSessionManager.shared.
+// Production Expo Module — exposes ARSessionManager to React Native JS.
+// All AR operations are delegated to ARSessionManager.shared.
 
 import ExpoModulesCore
 import ARKit
@@ -12,16 +11,21 @@ public class ARSessionModule: Module {
 
     Name("ARSessionModule")
 
-    // ── Events emitted to JS ──────────────────────────────────────────────────
+    // ── Events emitted to JS ────────────────────────────────────────────────────
     Events("onAnchorPositionsUpdated", "onTrackingStateChanged")
 
-    // ── Lifecycle ─────────────────────────────────────────────────────────────
+    // ── Lifecycle ───────────────────────────────────────────────────────────────
 
+    // isSupported: ARWorldTrackingConfiguration.isSupported is the correct
+    // Apple API for checking ARKit hardware support (A9 chip or later).
     AsyncFunction("isSupported") { () -> Bool in
       return ARWorldTrackingConfiguration.isSupported
     }
 
     AsyncFunction("startSession") { () -> Void in
+      guard ARWorldTrackingConfiguration.isSupported else {
+        throw Exception(name: "UNSUPPORTED", description: "ARKit is not supported on this device.")
+      }
       ARSessionManager.shared.startSession()
     }
 
@@ -37,20 +41,23 @@ public class ARSessionModule: Module {
       ARSessionManager.shared.resumeSession()
     }
 
-    // ── Frame capture ─────────────────────────────────────────────────────────
+    // ── Frame capture ───────────────────────────────────────────────────────────
 
     AsyncFunction("captureFrame") { (quality: Double) -> [String: Any] in
       let base64 = try ARSessionManager.shared.captureFrame(quality: quality)
       return ["base64": base64]
     }
 
-    // ── Spatial ───────────────────────────────────────────────────────────────
+    // ── Spatial operations ──────────────────────────────────────────────────────
 
     AsyncFunction("hitTest") { (xNorm: Double, yNorm: Double) -> [Double]? in
       return ARSessionManager.shared.hitTest(xNorm: xNorm, yNorm: yNorm)
     }
 
     AsyncFunction("createAnchor") { (id: String, matrix: [Double]) -> Void in
+      guard matrix.count == 16 else {
+        throw Exception(name: "INVALID_MATRIX", description: "Matrix must have exactly 16 elements.")
+      }
       ARSessionManager.shared.createAnchor(id: id, matrix: matrix)
     }
 
@@ -70,7 +77,8 @@ public class ARSessionModule: Module {
       return ARSessionManager.shared.getTrackingState()
     }
 
-    // ── Native View ───────────────────────────────────────────────────────────
-    View(ARSessionView.self)
+    // ── Native View ─────────────────────────────────────────────────────────────
+    // Empty trailing closure required for Expo SDK 52 type inference.
+    View(ARSessionView.self) {}
   }
 }
