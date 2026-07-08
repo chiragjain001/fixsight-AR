@@ -1,23 +1,13 @@
 /**
  * CameraView.tsx
  *
- * The new camera component for Solution A (always-on AR).
- * Replaces CameraView.vision-camera.tsx entirely.
- *
- * What this does:
- * - Renders the native AR camera feed (ARKit/ARCore via ARNativeView)
- * - Starts and owns the AR session lifecycle via useARSession
- * - Renders AROverlayLayer (Skia rings + RN labels) on top
- * - Shows tracking quality banner
- * - Exposes captureFrame via workflowStore so voice session can use it
- *
- * What this does NOT do:
- * - No VisionCamera, no frame processor, no TFLite, no IoU tracking
+ * Camera component — uses VisionCamera for the camera feed.
+ * AR session bridge is still active for anchor/spatial operations.
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { ARNativeView } from '../ar/ARNativeView';
+import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera';
 import { AROverlayLayer } from '../ar/AROverlayLayer';
 import { ARTrackingStatus } from '../ar/ARTrackingStatus';
 import { useARSession } from '../../hooks/useARSession';
@@ -28,28 +18,45 @@ export function CameraView() {
   const { captureFrame } = useARSession();
   const setCaptureFrame = useWorkflowStore((s) => s.setCaptureFrame);
   const trackingState = useARAnchorStore((s) => s.trackingState);
+  const { hasPermission, requestPermission } = useCameraPermission();
+  const device = useCameraDevice('back');
+  const cameraRef = useRef<Camera>(null);
 
-  // Register captureFrame with workflowStore so useVoiceSession
-  // and any other hook can call it without importing ARBridge directly.
+  useEffect(() => {
+    if (!hasPermission) requestPermission();
+  }, [hasPermission]);
+
+  // Register captureFrame with workflowStore
   useEffect(() => {
     setCaptureFrame(captureFrame);
   }, [captureFrame, setCaptureFrame]);
 
-  if (trackingState === 'unsupported') {
+  if (!hasPermission) {
     return (
       <View style={styles.errorContainer}>
-        <Text style={styles.errorText}>
-          AR is not supported on this device.{'\n'}
-          This app requires ARCore (Android 8+) or ARKit (iPhone 6s+).
-        </Text>
+        <Text style={styles.errorText}>Camera permission is required.</Text>
+      </View>
+    );
+  }
+
+  if (!device) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>No camera device found.</Text>
       </View>
     );
   }
 
   return (
     <>
-      {/* Native AR camera feed — owns the camera hardware */}
-      <ARNativeView style={StyleSheet.absoluteFill} />
+      {/* VisionCamera — stable camera feed */}
+      <Camera
+        ref={cameraRef}
+        style={StyleSheet.absoluteFill}
+        device={device}
+        isActive={true}
+        photo={true}
+      />
 
       {/* Skia rings + RN label pills */}
       <AROverlayLayer />
@@ -75,3 +82,4 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
 });
+
